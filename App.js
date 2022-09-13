@@ -1,12 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View,Text,SafeAreaView } from 'react-native';
+import {ContextProvider} from './context';
+import Main from './navigation/MainNavigation';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+  <>
+   
+   <SafeAreaView  style={styles.safe}/>
+
+    <ContextProvider>
+      <Main/>
+    </ContextProvider>
+  </>
   );
 }
 
@@ -17,4 +23,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  safe:{
+    backgroundColor:'#010101'
+  }
 });

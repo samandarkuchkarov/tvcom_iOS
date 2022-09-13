@@ -1,0 +1,97 @@
+import { StyleSheet,Dimensions } from "react-native";
+
+const {width, height} = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+    container:{
+        width,
+        height:width/1.777,
+        position:'absolute',
+        justifyContent:'flex-end'
+    },
+    container2:{
+        width,
+        height:width/1.777,
+        position:'absolute',
+    },
+    pouseWrapper:{
+        height:width/(1.77*3),
+        width:width/(1.77*3),
+        borderRadius:100,
+        backgroundColor:'#00000063',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    centerIcon1:{
+        width:width/(1.77*3)-40,
+        height:width/(1.77*3)-40,
+        marginLeft:5,
+        resizeMode:'contain',
+        zIndex:2
+    },
+    centerIcon0:{
+        width:width/(1.77*3)-40,
+        height:width/(1.77*3)-40,
+        resizeMode:'contain',
+        zIndex:4
+    },
+    btnList:{
+        alignItems:'center',
+        position:'absolute',
+        width:width,
+        height:width/1.77,
+        justifyContent:'center',
+        flexDirection:'row'
+    },
+    btnList2:{
+        alignItems:'center',
+        position:'absolute',
+        width:width,
+        height:width/1.77,
+        justifyContent:'space-around',
+        flexDirection:'row'
+    },
+    secondScreen:{
+        width,
+        height:50,
+        justifyContent:'space-between',
+        backgroundColor:'#00000063'
+    },
+    bottomInfo:{
+        width:width-20,
+        marginLeft:10,
+        justifyContent:'space-between',
+        flexDirection:'row',
+        alignItems:'center',
+        paddingTop:5
+    },
+    time:{
+        color:'#fff',
+    },
+    fullScreenIcon:{
+        width:20,
+        height:20
+    },
+    leftSkip:{
+        width:48,
+        height:40,
+        resizeMode:'contain'
+    },
+    leftSkipSeria:{
+        width:30,
+        height:30,
+        resizeMode:'contain'
+    },
+    skipBlock:{
+        width:(width/2)-((width/(1.77))/6),
+        height:width/(1.77),
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    sec:{
+        color:'#fff'
+    }
+});
+
+export default styles
+  

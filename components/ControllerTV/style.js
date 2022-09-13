@@ -1,0 +1,106 @@
+import { StyleSheet, Dimensions } from "react-native";
+const {width,height} = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+    contentFullScreen:{
+        position:'absolute',
+        height:width,
+        width:height,
+        justifyContent:'flex-end'
+    },
+    content:{
+        height:width/1.77,
+        width:width,
+        position:'absolute',
+        justifyContent:'flex-end',
+        zIndex:2
+    },
+    bottom:{
+        width,
+        height:50,
+        justifyContent:'space-between',
+        backgroundColor:'#00000063'
+    },
+    bottomFullScreen:{
+        width:height,
+        height:50,
+        backgroundColor:'#fff',
+    },
+    btnContainer0:{
+        width:width,
+        height:width/1.77,
+        position:'absolute',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    btnList:{
+        width:width,
+        height:width/(1.77*3),
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    pouseWrapper:{
+        height:width/(1.77*3),
+        width:width/(1.77*3),
+        borderRadius:100,
+        backgroundColor:'#00000063',
+        justifyContent:'center',
+        alignItems:'center',
+        marginHorizontal:40
+    },
+    centerIcon1:{
+        width:width/(1.77*3)-40,
+        height:width/(1.77*3)-40,
+        marginLeft:5,
+        resizeMode:'contain',
+        zIndex:2
+    },
+    centerIcon0:{
+        width:width/(1.77*3)-40,
+        height:width/(1.77*3)-40,
+        resizeMode:'contain',
+        zIndex:4
+    },
+    bottomBtn:{
+        position:'absolute',
+        height:width/1.77,
+        width:width,
+        zIndex:1,
+    },
+    liveBlock:{
+        width:100,
+        height:34,
+        position:'absolute',
+        right:10,
+        top:10
+    },
+    liveIcon:{
+        width:'100%',
+        height:'100%'
+    },
+    skip:{
+        width:width/(1.77*3)-50,
+        height:width/(1.77*3)-50,
+    },
+    bottomData:{
+        flexDirection:'row',
+        width:width-40,
+        marginLeft:20,
+        justifyContent:'space-between'
+    },
+    time:{
+        color:'#fff',
+        fontSize:16,
+        marginTop:5
+    },
+    fullScreenIcon:{
+        width:20,
+        height:20,
+        marginTop:5
+    }
+    
+});
+
+export default styles
+  
