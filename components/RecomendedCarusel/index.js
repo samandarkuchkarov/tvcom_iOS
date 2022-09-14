@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {  ActivityIndicator, Dimensions, View } from 'react-native'
-import { Datas } from '../../../context';
+import { Datas } from '../../context';
 import FilmCaruselPhone from '../FilmCaruselPhone';
 
 const { width } = Dimensions.get('window');

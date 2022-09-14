@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
 import styles from './style';
-import { Datas } from '../../../context';
+
 
 
 const Choser = ({navigation}) => {
@@ -9,7 +9,7 @@ const Choser = ({navigation}) => {
     const Press = (name) =>{
         navigation.navigate(name)
     }
-    const route = navigation.dangerouslyGetState().routes
+    const route = navigation.getState().routes
     let name = route[route.length-1].name
     
     return (

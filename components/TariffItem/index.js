@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
-import FastImage from 'react-native-fast-image'
+import { View, Text, TouchableOpacity,Image } from 'react-native'
 import styles from './style'
 
 export default function TariffItem({openModal, isLogin, item, navigation}) {
@@ -13,10 +12,9 @@ export default function TariffItem({openModal, isLogin, item, navigation}) {
     }
   return (
     <View style={styles.wrapper}>
-        <FastImage
+        <Image
             source={{uri: 'http://play.tvcom.uz:8008/storage/' + item.img_big}}
             style={styles.back}
-            resizeMode={FastImage.resizeMode.contain}
         />
         <View style={styles.info}>
               <Text allowFontScaling={false}style={styles.desc}>{item.desc}</Text> 

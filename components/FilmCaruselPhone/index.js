@@ -46,7 +46,7 @@ export default function FilmCaruselPhone({movieContent,isLogin,subscriptions,pro
                     <TouchableOpacity onPress={()=>navigation.navigate('MovieList',{mainProps:params})}>
                         <View style={styles.block}>
                             <View style={styles.block3}>
-                                <Image style={styles.dotts} source={require('../../../images/3dotts.png')}/>
+                                <Image style={styles.dotts} source={require('../../images/3dotts.png')}/>
                             </View>
                             <View style={styles.block2}>
                             <Text style={styles.name2} numberOfLines={2}>

@@ -32,14 +32,13 @@ const styles = StyleSheet.create({
     },
     icon: {
         width: '100%',
-        height: '100%',
+        height: '95%',
         resizeMode:'stretch',
         borderRadius:12,
         overflow:'hidden',
         marginTop:5,
     },
     imageWrapper: {
-        borderRadius: 50,
         height: 110,
         width: 180,
         overflow: 'hidden',

@@ -1,9 +1,9 @@
 import { View, Text, StatusBar } from 'react-native'
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { hideNavigationBar, showNavigationBar } from 'react-native-navigation-bar-color';
-import { Datas } from '../../../context'
+// import { hideNavigationBar, showNavigationBar } from 'react-native-navigation-bar-color';
+import { Datas } from '../../context'
 import NotFullControllerMovie from '../notFullControllerMovie'
-import Orientation from 'react-native-orientation-locker';
+// import Orientation from 'react-native-orientation-locker';
 import FullControlMovie from '../FullControlMovie'
 
 
@@ -29,7 +29,7 @@ export default function ControllerMovie({isPouse,setPouse,defaultStatus,status,v
             clearTimeout(timerSkip.current)
             if(time<0){
                 timerSkip.current = setTimeout(()=>{
-                    video.current.seek(0)
+                    video.current.playFromPositionAsync(0)
 
                 },300)
                 setDoubleScreen(1)
@@ -37,7 +37,7 @@ export default function ControllerMovie({isPouse,setPouse,defaultStatus,status,v
                 setSek(0)
             }else{
                 timerSkip.current = setTimeout(()=>{
-                    video.current.seek(time)
+                    video.current.playFromPositionAsync(time)
                 },300)
                 setDoubleScreen(1)
                 setChange(i=>!i)
@@ -66,14 +66,14 @@ export default function ControllerMovie({isPouse,setPouse,defaultStatus,status,v
             clearTimeout(timerSkip.current)
             if(time>defaultStatus.duration){
                 timerSkip.current = setTimeout(()=>{
-                    video.current.seek(defaultStatus.duration)
+                    video.current.playFromPositionAsync(defaultStatus.duration)
                 },300)
                 setDoubleScreen(2)
                 setChange(i=>!i)
                 setSek(0)
             }else{
                 timerSkip.current = setTimeout(()=>{
-                    video.current.seek(time)
+                    video.current.playFromPositionAsync(time)
                 },300)
                 setDoubleScreen(2)
                 setChange(i=>!i)
@@ -138,13 +138,13 @@ export default function ControllerMovie({isPouse,setPouse,defaultStatus,status,v
     const rotate = ()=>{
         if(!isFullScreen){
             //hideNavigationBar()
-            Orientation.lockToLandscape();
+            // Orientation.lockToLandscape();
             setFullScreen(true)
             StatusBar.setHidden(true)
             setTabbarVisible(false)
         }else{
-            showNavigationBar()
-            Orientation.lockToPortrait();
+            // showNavigationBar()
+            // Orientation.lockToPortrait();
             StatusBar.setHidden(false)
             setTabbarVisible(true)
             setFullScreen(false)

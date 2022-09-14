@@ -1,0 +1,70 @@
+import { StyleSheet, Dimensions } from "react-native";
+const {width,height} = Dimensions.get('window');
+const styles = StyleSheet.create({
+    wrapper:{
+        flex:1,
+        backgroundColor:'#010101',
+    },
+    image:{
+        width,
+        height:width/0.858
+    },
+    texts:{
+        width:width,
+        marginLeft:0,
+        marginTop:-160
+    },
+    title:{
+        color:'#fff',
+        fontFamily:'Montserrat-Bold',
+        fontSize:28,
+        textAlign:'center'
+    },
+    red:{
+        color:'#E41A4B'
+    },
+    desc:{
+        color:'#fff',
+        fontSize:22,
+        fontFamily:'Montserrat-Medium',
+        width:width-80,
+        marginLeft:40,
+        textAlign:'center',
+        marginTop:20
+    },
+    desc2:{
+        color:'#fff',
+        fontSize:22,
+        fontFamily:'Montserrat-Bold',
+        width:width-60,
+        marginLeft:30,
+        textAlign:'center',
+        marginTop:20
+    },
+    imageList:{
+        width:width-20,
+        marginLeft:10,
+        flexDirection:'row',
+        justifyContent:'space-evenly',
+        marginTop:20
+    },
+    imageWrapper:{
+        width:130,
+        height:200,
+        alignItems:'center'
+    },
+    qr:{
+        width:130,
+        height:130,
+        resizeMode:'contain'
+    },
+    device:{
+        color:'#fff',
+        fontFamily:'Montserrat-Medium',
+        fontSize:18,
+        marginTop:10
+    }
+});
+
+export default styles
+  

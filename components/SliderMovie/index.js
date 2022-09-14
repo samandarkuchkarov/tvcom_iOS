@@ -7,7 +7,7 @@ export default function SliderMovie({defaultStatus,restartVisibility,video,statu
 
     const changePosition = (sec) =>{
         if(video.current){
-            video.current.seek(sec)
+            video.current.playFromPositionAsync(sec)
         }
     }
 

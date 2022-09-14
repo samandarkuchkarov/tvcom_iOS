@@ -24,7 +24,7 @@ export default function Navbar({ref2}) {
         <ImageButton
           onPress={()=>ref2.current.navigate('Filter')}
           height={23}
-          src={require('../../images/filterMovies.png')}
+          src={require('../images/filterMovies.png')}
         />
       </View>
     </View>

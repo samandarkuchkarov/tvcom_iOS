@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react'
 import { View, Text, FlatList,Image, TouchableOpacity } from 'react-native'
-import FastImage from 'react-native-fast-image'
 
 import styles from './style'
 
@@ -15,7 +14,7 @@ const ActorItem = (item,navigation,index)=>{
         <View style={{...styles.wrapperItem,marginLeft:index==0?10:0}}>
                 <View style={styles.actorItem}>
                     <View style={styles.iconWrapper}>
-                        <Image style={styles.icon} source={item.photo?{uri:item.photo}:require('../../../images/profileActors.png')}/>
+                        <Image style={styles.icon} source={item.photo?{uri:item.photo}:require('../../images/profileActors.png')}/>
                     </View>
                     <Text allowFontScaling={false}numberOfLines={2} style={styles.name}>
                         {item.name}

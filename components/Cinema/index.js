@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, ImageBackground, Image, ScrollView, TouchableOpacity } from 'react-native';
-
-import {DrawerItem} from '@react-navigation/drawer';
-import {Datas} from '../../../context';
+import {Datas} from '../../context';
 
 
 
@@ -47,8 +45,8 @@ export default function Cinema({setCinema, cinema, selectedCinema, setSelectedCi
                     <TouchableOpacity onPress={()=>press(item)} key={item.cinema_img}>
                         <ImageBackground  source={{uri:'http://play.tvcom.uz:8008/storage/'+item.cinema_img2}} style={{...styles.block,borderColor:selectedCinema.id == item.id ? '#E41A4B' : 'transparent',marginLeft:index==0?20:10}}>
                             <View style={styles.dott}>
-                                {selectedCinema.id == item.id?<Image style={styles.check} source={require('../../../images/cycleCheck1.png')}/>:
-                                <Image style={styles.check} source={require('../../../images/cycleCheck0.png')}/>}
+                                {selectedCinema.id == item.id?<Image style={styles.check} source={require('../../images/cycleCheck1.png')}/>:
+                                <Image style={styles.check} source={require('../../images/cycleCheck0.png')}/>}
                             </View>
                         </ImageBackground>
                     </TouchableOpacity>

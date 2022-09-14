@@ -1,7 +1,6 @@
 import React from 'react'
-import { Text, FlatList, TouchableOpacity, View } from 'react-native'
+import { Text, FlatList, TouchableOpacity, View, Image } from 'react-native'
 import styles from './style';
-import FastImage from 'react-native-fast-image';
 
 export default function JanrFilterCarusel({data,selectedJanrId, setSelectedJanrId, selectJanr}) {
 
@@ -10,9 +9,8 @@ export default function JanrFilterCarusel({data,selectedJanrId, setSelectedJanrI
         let focus = selectedJanrId.some(i=>i.id==item.id)
         return <TouchableOpacity  onPress={() => selectJanr(item)}>
                     <View style={{...styles.card,backgroundColor:focus?'#E41A4B':'#1c1c1c'}}>
-                        <FastImage 
+                        <Image 
                             style={styles.image}
-                            resizeMode={FastImage.resizeMode.contain}
                             source={focus ? {uri:'http://play.tvcom.uz:8008/storage/' +item.img2}: {uri:'http://play.tvcom.uz:8008/storage/' +item.img}
                         }/>
                         <Text allowFontScaling={false}style={{...styles.cardText}}>
@@ -30,10 +28,9 @@ export default function JanrFilterCarusel({data,selectedJanrId, setSelectedJanrI
             ListHeaderComponent={
                 <TouchableOpacity onPress={()=>setSelectedJanrId([])}>
                     <View style={{...styles.card,backgroundColor:selectedJanrId.length?'#1c1c1c':'#E41A4B',marginLeft:10}}>
-                        <FastImage 
+                        <Image 
                             style={styles.image}
-                            resizeMode={FastImage.resizeMode.contain}
-                            source={selectedJanrId.length!=0?require('../../../images/allTV0.png'):require('../../../images/allTV1.png')}
+                            source={selectedJanrId.length!=0?require('../../images/allTV0.png'):require('../../images/allTV1.png')}
                             />
                         <Text allowFontScaling={false}style={{...styles.cardText}}>
                             Все
@@ -52,10 +49,9 @@ export default function JanrFilterCarusel({data,selectedJanrId, setSelectedJanrI
             ListHeaderComponent={
                 <TouchableOpacity onPress={()=>setSelectedJanrId([])}>
                     <View style={{...styles.card,backgroundColor:selectedJanrId.length?'#1c1c1c':'#E41A4B',marginLeft:10}}>
-                        <FastImage 
+                        <Image 
                             style={styles.image}
-                            resizeMode={FastImage.resizeMode.contain}
-                            source={selectedJanrId.length!=0?require('../../../images/allTV0.png'):require('../../../images/allTV1.png')}
+                            source={selectedJanrId.length!=0?require('../../images/allTV0.png'):require('../../images/allTV1.png')}
                             />
                         <Text allowFontScaling={false}style={{...styles.cardText}}>
                             Все

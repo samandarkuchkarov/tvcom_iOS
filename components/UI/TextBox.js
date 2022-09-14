@@ -9,7 +9,7 @@ export default function TextBox({label, style, error, password,secureTextEntry,.
       <View style={{zIndex:2}}>
         {password?
         <TouchableWithoutFeedback onPress={()=>setShowWord(i=>!i)}>
-            <Image style={{position:'absolute',width:30,height:30,right:10,top:10,tintColor:'#474747',zIndex:2,resizeMode:'contain'}} source={showWord?require('../../../images/eye1.png'):require('../../../images/eye0.png')}/>
+            <Image style={{position:'absolute',width:30,height:30,right:10,top:10,tintColor:'#474747',zIndex:2,resizeMode:'contain'}} source={showWord?require('../../images/eye1.png'):require('../../images/eye0.png')}/>
         </TouchableWithoutFeedback>
         :<></>}
       <TextInput

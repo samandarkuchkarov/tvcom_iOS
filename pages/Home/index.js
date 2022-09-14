@@ -6,8 +6,7 @@ import BannerCarousel from '../../components/BannerCarousel';
 import { getSubscriptionList, getPodborka, getPodborkaChannels, getChannel } from '../../Api';
 import TvCarusel from '../../components/TvCarusel';
 // import Orientation from 'react-native-orientation-locker';
-// import FilmCarusel from '../../components/FilmCaruselPhone';
-// import TvCarusel from '../../components/TvCarusel/index.js';
+import FilmCarusel from '../../components/FilmCaruselPhone';
 // import ModalToken from '../../components/ModalToken/index.js';
 // import ModalLastDay from '../../components/ModalLastDay/index.js';
 // import PushNotification from "react-native-push-notification";
@@ -25,28 +24,6 @@ export default function Home({navigation}) {
   const [channels,setChannedls] = useState()
   const [listCarusel,setListCarusel] = useState([])
   const [dataLastDay,setDataLastDay] = useState()
-
-    // useEffect(()=>{
-    //   Orientation.lockToPortrait()
-    //   messaging().onNotificationOpenedApp(remoteMessage => {
-    //     console.log(
-    //       'Notification caused app to open from background state:',
-    //       remoteMessage.notification,
-    //     );
-    //   });
-      
-    //   messaging()
-    //   .getInitialNotification()
-    //   .then(remoteMessage => {
-    //     if (remoteMessage) {
-    //       console.log(
-    //         'Notification caused app to open from quit state:',
-    //         remoteMessage.notification,
-    //       );
-    //     }
-
-    //   });
-    // },[])
 
 
     useEffect(()=>{
@@ -226,7 +203,7 @@ export default function Home({navigation}) {
         <BannerCarousel navigation={navigation} />
         {/* {alert?<ModalToken navigation={navigation}/>:dataLastDay?<ModalLastDay modalData={dataLastDay} navigation={navigation} setModalData={setDataLastDay} />:<></>} */}
         <TvCarusel navigation={navigation} channels={channels}/> 
-        {/* {listCarusel&&listCarusel.length?
+        {listCarusel&&listCarusel.length?
         listCarusel.map((item,index)=>(
           <FilmCarusel
             key={subscriptions?subscriptions.length+' '+item.name:item.name }
@@ -239,7 +216,7 @@ export default function Home({navigation}) {
             movieContent={item.movies}
             isLogin={isLogin}
           />)):<></>
-      } */}
+      }
       
     </ScrollView>
   );

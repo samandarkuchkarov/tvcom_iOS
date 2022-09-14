@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './style'
 import { View, TouchableWithoutFeedback, Image, Text, ActivityIndicator } from 'react-native'
-import { convertToNormal } from '../../../helper'
+import { convertToNormal } from '../../helper'
 import SliderMovie from '../SliderMovie'
 import { PinchGestureHandler } from 'react-native-gesture-handler'
 
@@ -15,13 +15,13 @@ export default function FullControlMovie({  restartVisibility, controllerVisible
                     <View style={styles.btnList}>
                         {serials&&serials.length>1&&loadData?<TouchableWithoutFeedback onPress={()=>{pervius();restartVisibility()}}>
                             <View style={styles.skipBlock}>
-                                <Image source={require('../../../images/Left.png')} style={{...styles.leftSkip,opacity:loadData&&loadData.fileId==serials[0].id?0:1}}/>
+                                <Image source={require('../../images/Left.png')} style={{...styles.leftSkip,opacity:loadData&&loadData.fileId==serials[0].id?0:1}}/>
                             </View>
                         </TouchableWithoutFeedback>:<></>}
                         {!loading?<TouchableWithoutFeedback onPress={()=>setPouse(i=>!i)}>
                         <View style={styles.pouseWrapper}>
-                            {isPouse?<Image style={styles.centerIcon1} source={require('../../../images/startIcon.png')}/>:<></>}
-                            {!isPouse?<Image style={styles.centerIcon0} source={require('../../../images/Pause-button.png')}/>:<></>}
+                            {isPouse?<Image style={styles.centerIcon1} source={require('../../images/startIcon.png')}/>:<></>}
+                            {!isPouse?<Image style={styles.centerIcon0} source={require('../../images/Pause-button.png')}/>:<></>}
                         </View>
                         </TouchableWithoutFeedback>:<></>}
                         {loading?
@@ -31,7 +31,7 @@ export default function FullControlMovie({  restartVisibility, controllerVisible
                         :<></>}
                         {serials&&serials.length>1&&loadData?<TouchableWithoutFeedback  onPress={()=>{next();restartVisibility()}}>
                             <View style={styles.skipBlock}>
-                                <Image source={require('../../../images/Right.png')} style={{...styles.leftSkip,opacity:loadData&&loadData.fileId==serials[serials.length-1].id?0:1}}/>
+                                <Image source={require('../../images/Right.png')} style={{...styles.leftSkip,opacity:loadData&&loadData.fileId==serials[serials.length-1].id?0:1}}/>
                             </View>
                         </TouchableWithoutFeedback>:<></>}
                     </View>
@@ -56,7 +56,7 @@ export default function FullControlMovie({  restartVisibility, controllerVisible
                         <View style={{...styles.btnList,justifyContent:'space-between'}}>
                             <TouchableWithoutFeedback onPress={()=>skip('left')}>
                                 <View style={{...styles.skipBlock,opacity:doubleScreen===1?1:0}}>
-                                    <Image source={require('../../../images/leftSkip.png')} style={styles.leftSkip}/>
+                                    <Image source={require('../../images/leftSkip.png')} style={styles.leftSkip}/>
                                     <Text allowFontScaling={false}style={styles.sec}>{sek} сек</Text>
                                 </View>
                             </TouchableWithoutFeedback>
@@ -67,7 +67,7 @@ export default function FullControlMovie({  restartVisibility, controllerVisible
                             :<></>}
                             <TouchableWithoutFeedback  onPress={()=>skip('right')}>
                                 <View style={{...styles.skipBlock,opacity:doubleScreen===2?1:0}}>
-                                    <Image source={require('../../../images/rightSkip.png')} style={styles.leftSkip}/>
+                                    <Image source={require('../../images/rightSkip.png')} style={styles.leftSkip}/>
                                     <Text allowFontScaling={false}style={styles.sec}>{sek} сек</Text>
                                 </View>
                             </TouchableWithoutFeedback>

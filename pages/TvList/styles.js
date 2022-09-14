@@ -1,0 +1,87 @@
+import {StyleSheet,Dimensions} from 'react-native';
+
+const {width,height} = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+  item:{
+    marginLeft:20,
+    marginBottom:10,
+    width:width-40,
+    flexDirection:'row',
+  },
+  imageWrapper:{
+    height:85,
+    width:142,
+    alignItems:'flex-end',
+    zIndex:2,
+    borderRadius:7,
+    overflow:'hidden'
+  },
+  icon:{
+    height:85,
+    width:142,
+    borderRadius:50,
+    overflow:'hidden',
+    position:'absolute',
+    zIndex:1,
+    borderRadius:7
+  },
+  textBlock:{
+    paddingHorizontal:20,
+    justifyContent:'space-around',
+    width:width-142-50,
+  },
+  loveBlock:{
+    justifyContent:'space-between',
+    width:width-142-50,
+    flexDirection:'row',
+  },
+  program_name:{
+    color:'#fff',
+    fontSize:18,
+  },
+  time:{
+    color:'#bcbcbc'
+  },
+  processBlock:{
+    width:width-142-50,
+    height:5,
+    alignItems:'flex-start',
+    justifyContent:'center',
+    backgroundColor:'#C4C4C4',
+    borderRadius:3,
+    overflow:'hidden'
+  },
+  redLine:{
+    backgroundColor:'#E41A4B',
+    height:5,
+  },
+  lockWrapper:{
+    zIndex:2,
+    marginTop:7,
+    marginRight:7,
+    width:35,
+    height:35,
+    backgroundColor:"#000000cf",
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius:7
+  },
+  lock:{
+    width:18,
+    height:25,
+  },
+  love:{
+    width:30,
+    height:30,
+    resizeMode:'contain'
+  },
+  center:{
+    width:width,
+    height:height-160,
+    justifyContent:'center',
+    alignItems:'center'
+  }
+});
+
+export default styles;

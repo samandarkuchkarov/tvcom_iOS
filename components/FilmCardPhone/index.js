@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
-import FastImage from 'react-native-fast-image';
 import styles from './style';
 
 
@@ -30,17 +29,16 @@ const FilmCardPhone = ({item,providerIcons,isLogin,subscriptions,onPress}) => {
                 <View>
                     <View style={styles.imageWrapper}>
                         
-                        {icon? <FastImage resizeMode={FastImage.resizeMode.contain} style={styles.cinema_icon} source={{uri:`http://play.tvcom.uz:8008/storage/`+icon.img}}/>
+                        {icon? <Image style={styles.cinema_icon} source={{uri:`http://play.tvcom.uz:8008/storage/`+icon.img}}/>
                         :<></>}
 
-                        <FastImage
+                        <Image
                             style={styles.image}
-                            resizeMode={FastImage.resizeMode.cover}
                             source={{
                                 uri: typeof item.thumbnail_big == 'string' && item.thumbnail_big.length 
                                 ?  item.thumbnail_big
                                 :  'https://st.depositphotos.com/3265665/4462/i/600/depositphotos_44627471-stock-photo-transparent.jpg',
-                                priority: FastImage.priority.normal,
+                              
                             }}
                         />
                     </View>

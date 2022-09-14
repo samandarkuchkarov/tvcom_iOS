@@ -23,11 +23,11 @@ export default function SerialCarusel({ season, data, load, normal, pos, loadDat
     const renderItem = ({item,index}) =>{
         return  <TouchableOpacity onPress={()=>load(item)}>
                     <View style={{...styles.item,marginLeft:index==0?10:0}}>
-                        {pos.id&&pos.id!=-1&&pos.id==item.id?<Image style={styles.serialFace} source={require('../../../images/serialFace1.png')}/>:<></>}
-                        {pos.id&&pos.id!=-1&&pos.id!=item.id?<Image style={styles.serialFace} source={require('../../../images/serialFace.png')}/>:<></>}
-                        {(pos.id==0||pos.id==-1)&&loadData&&loadData.fileId==item.id?<Image style={styles.serialFace} source={require('../../../images/serialFace1.png')}/>:<></>}
-                        {(pos.id==0||pos.id==-1)&&loadData&&loadData.fileId!=item.id?<Image style={styles.serialFace} source={require('../../../images/serialFace.png')}/>:<></>}
-                        {pos.id==-1&&!loadData?<Image style={styles.serialFace} source={require('../../../images/serialFace.png')}/>:<></>}
+                        {pos.id&&pos.id!=-1&&pos.id==item.id?<Image style={styles.serialFace} source={require('../../images/serialFace1.png')}/>:<></>}
+                        {pos.id&&pos.id!=-1&&pos.id!=item.id?<Image style={styles.serialFace} source={require('../../images/serialFace.png')}/>:<></>}
+                        {(pos.id==0||pos.id==-1)&&loadData&&loadData.fileId==item.id?<Image style={styles.serialFace} source={require('../../images/serialFace1.png')}/>:<></>}
+                        {(pos.id==0||pos.id==-1)&&loadData&&loadData.fileId!=item.id?<Image style={styles.serialFace} source={require('../../images/serialFace.png')}/>:<></>}
+                        {pos.id==-1&&!loadData?<Image style={styles.serialFace} source={require('../../images/serialFace.png')}/>:<></>}
                         <Text allowFontScaling={false}numberOfLines={2} style={styles.seriaText}>{normal?'Серия ':""}{normal?item.seria:item.caption}</Text>
                     </View>
                 </TouchableOpacity>

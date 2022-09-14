@@ -44,7 +44,7 @@ export const getChannelInfo = async(search,token) => {
       client_id: 1,
       search,
       device:'android_stb',
-      device_uid
+      //device_uid
     },
   })
     .then(e => {
@@ -72,7 +72,7 @@ export const logoutApi = async (token,phone) => {
       authkey:token,
       client_id:1,
       device: phone?'android':'android_stb',
-      device_uid
+      //device_uid
     }
   })
     .then(e => {
@@ -127,9 +127,9 @@ export const login = async(data,apiKey,phone)=>{
     params:{
       ...params,
       device:phone?'android':"android_stb",
-      device_uid,
-      device_model,
-      device_serial
+      // device_uid,
+      // device_model,
+      // device_serial
     
     }}).then(async e => {
       if(typeof e.data == 'string'){
@@ -226,7 +226,7 @@ export const resetPassword = async( mobile_phone_number, code, apiKey, phone ) =
       client_id:1,
       code:code?code:null,
       device:phone?'android':'android_stb',
-      device_uid
+      //device_uid
     }
   }).then(e=>{
     if(typeof e.data ==='string'){

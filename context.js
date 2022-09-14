@@ -489,8 +489,8 @@ export const ContextProvider = props => {
           authkey: token1,
           client_id: 1,
           device:phone?'android':'android_stb',
-        //device_uid,
-          device_model
+          //device_uid,
+          // device_model
 
           
         },

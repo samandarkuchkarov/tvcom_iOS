@@ -3,7 +3,7 @@ import { View,Dimensions } from 'react-native'
 import styles from './style'
 import TabBarComp from '../UI/TabBar'
 const {width, height} = Dimensions.get('window');
-import { Datas } from '../../../context';
+import { Datas } from '../../context';
 
 export default function TabBar({ref2,route}) {
     const {isLogin} = useContext(Datas)

@@ -1,0 +1,101 @@
+import { StyleSheet, Dimensions } from "react-native";
+
+const {width,height} = Dimensions.get('window');
+const styles = StyleSheet.create({
+    wrapper:{
+        backgroundColor:'#010101',
+        flex:1,
+        zIndex:3
+    },
+    container:{
+        backgroundColor:'#010101',
+        flex:1
+    },
+    title:{
+        fontSize:26,
+        marginTop:20,
+        marginLeft:10,
+        color:'#fff',
+        fontWeight:'bold',
+        marginBottom:10,
+    },
+    typesContainer:{
+        width:width-20,
+        justifyContent:'space-between',
+        flexWrap:'wrap',
+        flexDirection:'row',
+        marginLeft:10,
+        marginBottom:10
+    },
+    type:{
+        width:(width-20)/2 - 2.5,
+        height:40,
+        backgroundColor:'#1c1c1c',
+        borderRadius:7,
+        marginTop:10,
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    typeText:{
+        color:'#fff',
+        fontFamily:'Montserrat-Medium',
+    },
+    titleCat:{
+        color:'#fff',
+        fontSize:20,
+        marginLeft:10,
+        fontWeight:'bold',
+        marginBottom:15
+    },
+    selectYear:{
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    arrow:{
+        width:20,
+        height:20,
+        resizeMode:'contain',
+        transform:[{rotate:'90deg'}],
+        marginLeft:10,
+        marginTop:-10
+    },
+    btnContainer:{
+        paddingVertical:10,
+        position:'absolute',
+        zIndex:2,
+        bottom:0,
+        width:width,
+        backgroundColor:'#000'
+ 
+    },
+    btnActive:{
+        width:width-20,
+        marginLeft:10,
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'#E41A4B',
+        height:40,
+        borderRadius:7
+    },
+    btnNotActive:{
+        width:width-20,
+        marginLeft:10,
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'#1c1c1c',
+        height:40,
+        marginTop:10,
+        borderRadius:7
+    },
+    bottom:{
+        height:120,
+        width:width
+    },
+    btnText:{
+        color:'#fff',
+        fontSize:16
+    }
+});
+
+export default styles
+  
