@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { TouchableWithoutFeedback, View, Dimensions, Image, Text } from 'react-native'
 import styles from './style'
 import SliderTv from '../SliderTv';
-import { Datas } from '../../../context';
-import { getTime } from '../../../Api';
-import {converter} from '../../../helper'
+import { Datas } from '../../context';
+import { getTime } from '../../Api';
+import {converter} from '../../helper'
 
 
 
@@ -30,21 +30,21 @@ export default function notFullControll({rotate, findPos, sliderVal, setSliderVa
                 </TouchableWithoutFeedback>
                 <View style={styles.btnList}>
                    {!disableTimeShift? <TouchableWithoutFeedback onPress={()=>findPos('left')}>
-                      <Image style={styles.skip} source={require('../../../images/Left.png')}/>
+                      <Image style={styles.skip} source={require('../../images/Left.png')}/>
                     </TouchableWithoutFeedback>:<></>}
 
                     <TouchableWithoutFeedback onPress={()=>setPouse(i=>!i)}>
                       <View style={styles.pouseWrapper}>
-                        {isPouse?<Image style={styles.centerIcon1} source={require('../../../images/startIcon.png')}/>:<></>}
-                        {!isPouse?<Image style={styles.centerIcon0} source={require('../../../images/Pause-button.png')}/>:<></>}
+                        {isPouse?<Image style={styles.centerIcon1} source={require('../../images/startIcon.png')}/>:<></>}
+                        {!isPouse?<Image style={styles.centerIcon0} source={require('../../images/Pause-button.png')}/>:<></>}
                       </View>
                     </TouchableWithoutFeedback>
 
                     {!live&&!disableTimeShift?<TouchableWithoutFeedback onPress={()=>findPos('right')}>
-                      <Image style={styles.skip} source={require('../../../images/Right.png')}/>
+                      <Image style={styles.skip} source={require('../../images/Right.png')}/>
                     </TouchableWithoutFeedback>:<></>}
                     {live&&!disableTimeShift?<TouchableWithoutFeedback onPress={restart}>
-                      <Image style={styles.skip} source={require('../../../images/restart0.png')}/>
+                      <Image style={styles.skip} source={require('../../images/restart0.png')}/>
                     </TouchableWithoutFeedback>:<></>}
 
                 </View>
@@ -58,7 +58,6 @@ export default function notFullControll({rotate, findPos, sliderVal, setSliderVa
                       <Image style={styles.fullScreenIcon} source={require('../../assets/images/fullScreen1.png')}/>
                     </TouchableWithoutFeedback>
                 </View>
-
                 <SliderTv change={change} sliderVal={sliderVal} setSliderValue={setSliderValue} timer={timer} fetchTimeShift={fetchTimeShift} restartVisibility={restartVisibility} timeData={timeData}/>
               </View>
           </View>

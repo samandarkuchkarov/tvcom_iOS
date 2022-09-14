@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     },
     bottom:{
         width,
-        height:50,
+        height:60,
         justifyContent:'space-between',
         backgroundColor:'#00000063'
     },

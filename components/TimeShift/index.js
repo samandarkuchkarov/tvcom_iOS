@@ -1,8 +1,7 @@
 import React,{ useEffect, useState, useRef } from 'react'
 import { View, ScrollView, Text, TouchableWithoutFeedback, FlatList, Dimensions, Image } from 'react-native'
-import FastImage from 'react-native-fast-image';
-import { converter } from '../../../helper';
-import { getTime } from '../../../Api';
+import { converter } from '../../helper';
+import { getTime } from '../../Api';
 
 import styles from './style';
 const {width} = Dimensions.get('window');
@@ -76,9 +75,9 @@ export default function TimeShift({timeData,programData,fetchTimeShift,currentCh
                     <TouchableWithoutFeedback onPress={()=>fetchTimeShift(item.begin_time)}>
                         <View style={styles.item}>
                             <View  style={styles.previewWrapper}>
-                                {item.preview&&item.preview.length?<FastImage style={styles.preview} source={{uri:item.preview}}/>:currentChannel?<FastImage style={styles.preview} source={{uri:currentChannel.icon}}/>:<></>}
-                                {live?<Image style={styles.shine} source={require('../../../images/shine.png')}/>:<></>}
-                                {past?<Image style={styles.watched} source={require('../../../images/watchedSymbol.png')}/>:<></>}
+                                {item.preview&&item.preview.length?<Image style={styles.preview} source={{uri:item.preview}}/>:currentChannel?<Image style={styles.preview} source={{uri:currentChannel.icon}}/>:<></>}
+                                {live?<Image style={styles.shine} source={require('../../images/shine.png')}/>:<></>}
+                                {past?<Image style={styles.watched} source={require('../../images/watchedSymbol.png')}/>:<></>}
                             </View>
                             <View style={styles.textBlock}>
                                 <Text allowFontScaling={false}numberOfLines={1} style={{...styles.name,color:future?'#545252':live? '#E41A4B': '#fff'}}>{item.name}</Text>

@@ -9,7 +9,7 @@ import TabBar from '../components/TabBar';
 import Search from '../pages/Search';
 import CurrentMovie from '../pages/CurrentMovie';
 import TvList from '../pages/TvList';
-// import CurrentTv from '../pages/CurrentChannel';
+import CurrentTv from '../pages/CurrentChannel';
 import Profile from '../pages/Profile';
 import Authentication from '../pages/Authentication';
 import { StatusBar } from 'expo-status-bar';
@@ -40,17 +40,6 @@ export default function Main() {
     
   }
   
-//   useEffect(() => {
-//     const fetch = async() =>{
-//       const response = changeNavigationBarColor('#010101')
-//     }
-//      fetch()
-  
-//     return () => {
-      
-//     }
-//   }, [])
-  
 
   return (
     <NavigationContainer onStateChange={changeRoute} ref={ref2}>
@@ -74,8 +63,8 @@ export default function Main() {
           <Stack.Screen options={{animationEnabled:false}}  name="PodpiskaMovie" component={PodpiskaMovie} />
           <Stack.Screen options={{animationEnabled:false}}  name="PodpiskaTv" component={PodpiskaTv} />
           <Stack.Screen options={{animationEnabled:false}}  name="Answers" component={Answers} />
+          <Stack.Screen options={{animationEnabled:false}}  name="CurrentTv" component={CurrentTv} />
           {/* 
-          <Stack.Screen options={{...TransitionPresets.FadeFromBottomAndroid}}  name="CurrentTv" component={CurrentTv} />
            */}
       </Stack.Navigator>
       {tabBarVisible?<TabBar route={route} changeRoute={changeRoute} ref2={ref2} />:<></>}

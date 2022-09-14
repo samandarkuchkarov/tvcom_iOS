@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { TouchableWithoutFeedback, View, Dimensions, Image, Text } from 'react-native'
 import styles from './style'
 import SliderTv from '../SliderTv';
-import { Datas } from '../../../context';
-import { getTime } from '../../../Api';
-import {converter} from '../../../helper'
+import { Datas } from '../../context';
+import { getTime } from '../../Api';
+import {converter} from '../../helper'
 import NotFullControll from '../notFullControll';
 import FullControll from '../fullControll';
 

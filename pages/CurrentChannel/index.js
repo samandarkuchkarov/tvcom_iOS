@@ -2,8 +2,8 @@ import React,{useContext, useState, useEffect } from 'react'
 import { ActivityIndicator, View, Dimensions } from 'react-native'
 import PlayerChannel from '../../components/PlayerChannel'
 import TimeShift from '../../components/TimeShift'
-import { getTime } from '../../../Api';
-import {Datas} from '../../../context'
+import { getTime } from '../../Api';
+import {Datas} from '../../context'
 const {height,width} = Dimensions.get('window');
 
 const isTab =  height<width;

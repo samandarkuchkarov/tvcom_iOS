@@ -5,12 +5,9 @@ import {globalStyles} from '../../utils/constants';
 import BannerCarousel from '../../components/BannerCarousel';
 import { getSubscriptionList, getPodborka, getPodborkaChannels, getChannel } from '../../Api';
 import TvCarusel from '../../components/TvCarusel';
-// import Orientation from 'react-native-orientation-locker';
 import FilmCarusel from '../../components/FilmCaruselPhone';
-// import ModalToken from '../../components/ModalToken/index.js';
-// import ModalLastDay from '../../components/ModalLastDay/index.js';
-// import PushNotification from "react-native-push-notification";
-// import messaging from '@react-native-firebase/messaging';
+import ModalToken from '../../components/ModalToken/index.js';
+import ModalLastDay from '../../components/ModalLastDay/index.js';
 
 
 export default function Home({navigation}) {
@@ -201,7 +198,7 @@ export default function Home({navigation}) {
   return (
     <ScrollView style={globalStyles.container}>
         <BannerCarousel navigation={navigation} />
-        {/* {alert?<ModalToken navigation={navigation}/>:dataLastDay?<ModalLastDay modalData={dataLastDay} navigation={navigation} setModalData={setDataLastDay} />:<></>} */}
+        {alert?<ModalToken navigation={navigation}/>:dataLastDay?<ModalLastDay modalData={dataLastDay} navigation={navigation} setModalData={setDataLastDay} />:<></>}
         <TvCarusel navigation={navigation} channels={channels}/> 
         {listCarusel&&listCarusel.length?
         listCarusel.map((item,index)=>(

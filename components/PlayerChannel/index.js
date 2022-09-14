@@ -1,14 +1,11 @@
 import React, { useContext, useRef, useState, useCallback, useEffect } from 'react'
 import styles from './style'
-import { Image, TouchableWithoutFeedback, View, BackHandler, Text } from 'react-native'
-import { Datas } from '../../../context';
-import ControllerTV from '../ControllerTV';
-import Orientation from 'react-native-orientation-locker';
+import { Image, View, BackHandler, Text } from 'react-native'
+import { Datas } from '../../context';
 import { StatusBar,Dimensions } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import VideoPlayer from '../../../components/VideoPlayer';
-import { getFullChannels, getChannel, getTime } from '../../../Api';
-import FastImage from 'react-native-fast-image'
+import { Video } from 'expo-av';
+import { getFullChannels, getChannel, getTime } from '../../Api';
 
 const { width, height } = Dimensions.get('window');
 
@@ -142,17 +139,20 @@ export default function PlayerChannel({channel,programData,setProgramData,allPro
     }, [currentId,channelList.all]);
 
 
-    const rotate = ()=>{
+    const rotate = async()=>{
+        // console.log( await video.current.dismissFullscreenPlayer())
         if(!isFullScreen){
-            Orientation.lockToLandscape();
-            setFullScreen(true)
-            StatusBar.setHidden(true)
-            setTabbarVisible(false)
+            // Orientation.lockToLandscape();
+            video.current.presentFullscreenPlayer()
+            // setFullScreen(true)
+            // StatusBar.setHidden(true)
+            // setTabbarVisible(false)
         }else{
-            Orientation.lockToPortrait();
-            StatusBar.setHidden(false)
-            setTabbarVisible(true)
-            setFullScreen(false)
+            // Orientation.lockToPortrait();
+            video.current.dismissFullscreenPlayer()
+            // StatusBar.setHidden(false)
+            // setTabbarVisible(true)
+            // setFullScreen(false)
         }
 
     }
@@ -169,7 +169,7 @@ export default function PlayerChannel({channel,programData,setProgramData,allPro
           }
         })
         if(isFullScreen){
-          Orientation.lockToPortrait();
+          // Orientation.lockToPortrait();
           StatusBar.setHidden(false)
           setTabbarVisible(true)
           setFullScreen(false)
@@ -251,14 +251,13 @@ export default function PlayerChannel({channel,programData,setProgramData,allPro
 
         {uri ?
         <View style={styles.wrapperVideo}>
-            <VideoPlayer
+            <Video
                 ref={video} 
                 style={{height:isFullScreen?width>height?height:width:width/1.77,width:isFullScreen?width>height? width:height:width}}
-                autoPlay={false} 
-                paused={isPouse}  
-                source={uri}
+                shouldPlay={!isPouse}
+                source={{uri:uri}}
+                useNativeControls={true}
             />
-            <ControllerTV disableTimeShift={disableTimeShift} fetchTimeShift={fetchTimeShift} change={change} setChange={setChange} setLastProgram={setLastProgram} setNextProgram={setNextProgram} nextProgram={nextProgram} lastProgram={lastProgram} programData={programData} live={live} timer={timer} setTimeData={setTimeData} setLive={setLive} setDisableTimeShift={setDisableTimeShift} setUri={setUri} setTimer={setTimer} timeData={timeData} setControllerVisible={setControllerVisible} controllerVisible={controllerVisible} timerController={timerController} isPouse={isPouse} setPouse={setPouse}  isFullScreen={isFullScreen} rotate={rotate} />
         </View>
        : 
         <></>
@@ -266,7 +265,7 @@ export default function PlayerChannel({channel,programData,setProgramData,allPro
       {!isFullScreen&&timeData.rpg?<>
         <View style={styles.channelInfo}>
             <View style={styles.nameBlock}>
-                {timeData.rpg.preview&&timeData.rpg.preview.length?<FastImage style={styles.icon} source={{uri:timeData.rpg.preview}}/>:currentChannel?<FastImage style={styles.icon} source={{uri:currentChannel.icon}}/>:<></>}
+                {timeData.rpg.preview&&timeData.rpg.preview.length?<Image style={styles.icon} source={{uri:timeData.rpg.preview}}/>:currentChannel?<Image style={styles.icon} source={{uri:currentChannel.icon}}/>:<></>}
                 <View>
                   <Text allowFontScaling={false}numberOfLines={2} style={styles.name}>{timeData.rpg.name}</Text>
                   <Text allowFontScaling={false}numberOfLines={3} style={styles.desc}>{currentChannel.program_description}</Text>
