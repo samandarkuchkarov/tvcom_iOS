@@ -130,7 +130,7 @@ const action = () => {
     if(showUnsubModal){
       unsubscribe();
     }else{
-      setAgree(`Напоминаем, что средства за ранее используемую подписку не подлежат возврату. Действие подписки будет активна в течении оплаченного периода`);
+      setAgree(`Напоминаем, что средства за ранее используемую подписку не подлежат возврату.`);
       setShowUnsubModal(true)
     }
   } else {
@@ -155,6 +155,7 @@ React.useEffect(() => {
         setUserData(userData);
         setMonthly(userData.monthly_payment)
         let aviableTariffs = userData.tariffs.item;
+        console.log(userData)
         tariffs = tariffs.map(item => {
           let New = {...item}
           let currentTariff = aviableTariffs.filter(

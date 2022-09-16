@@ -9,7 +9,6 @@ import Choser from '../components/Choser';
 import ModalToken from '../components/ModalToken';
 import { Datas } from '../context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { getSubscriptionList } from '../Api';
 
 const {width,height} = Dimensions.get('window');
 

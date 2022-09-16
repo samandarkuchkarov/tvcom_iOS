@@ -106,7 +106,7 @@ export default function PodpiskaTv({navigation}) {
       if(showUnsubModal){
         unsubscribe();
       }else{
-        setAgree(`Напоминаем, что средства за ранее используемую подписку не подлежат возврату. Действие подписки будет активна в течении оплаченного периода`);
+        setAgree(`Напоминаем, что средства за ранее используемую подписку не подлежат возврату.`);
         setShowUnsubModal(true)
       }
     } else {

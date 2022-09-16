@@ -5,6 +5,9 @@ import { parse } from 'fast-xml-parser';
 import { getApiKey } from './Api';
 import { getData } from './Api';
 import { storeData } from './Api';
+import * as Network from 'expo-network';
+
+import * as Device from 'expo-device';
 
 
 export const Datas = createContext(null);
@@ -36,8 +39,7 @@ export const ContextProvider = props => {
 
 
   const registration = async (phone,isPhone) => {
-    // //const device_uid = await DeviceInfo.getMacAddress()
-    // const device_model = await DeviceInfo.getModel()
+   const device_uid = await Network.getIpAddressAsync()
     return axios({
       method: 'GET',
       url: `https://mw.tvcom.uz/tvmiddleware/api/account/register`,
@@ -45,11 +47,11 @@ export const ContextProvider = props => {
         mobile_phone_number: phone,
         client_id: 1,
         api_key: apiKey,
-        device:isPhone?'android':'android_stb',
+        device:"ios",
         comment:isPhone?'Registration from android device new app':'Registration from android TV 2.0.2',
         send_sms:1,
-        // device_uid,
-        // device_model
+        device_uid,
+        device_model:Device.modelName
       },
     })
       .then(async e => {
@@ -99,7 +101,7 @@ export const ContextProvider = props => {
   
   const getFilms = async (params) => {
     let phone = params.phone
-    ////const device_uid = await DeviceInfo.getMacAddress()
+    const device_uid = await Network.getIpAddressAsync()
     if(phone){
       delete params.phone
     }
@@ -154,7 +156,7 @@ export const ContextProvider = props => {
             authkey: token1,
             api_key,
             device:'android_stb',
-        //device_uid,
+            device_uid,
             ...params,
           },
         }).then(e => {
@@ -212,7 +214,7 @@ export const ContextProvider = props => {
           params: {
             api_key,
             device:'android_stb',
-        //device_uid,
+            device_uid,
             ...params,
           },
         })
@@ -245,7 +247,7 @@ export const ContextProvider = props => {
   };
   
   const getFilmsWithParams = async (params) => {
-    //const device_uid = await DeviceInfo.getMacAddress()
+   const device_uid = await Network.getIpAddressAsync()
     let token1
     if(!token){
       let result = await getData('token',setToken,setLogin)
@@ -264,7 +266,7 @@ export const ContextProvider = props => {
             ...params,
             api_key:apiKey,
             device:'android_stb',
-        //device_uid
+            device_uid
 
           },
         }).then(e => {
@@ -317,7 +319,7 @@ export const ContextProvider = props => {
   };
 
   const getCurrentMovie = async (id,phone) => {
-    //const device_uid = await DeviceInfo.getMacAddress()
+   const device_uid = await Network.getIpAddressAsync()
     if (isLogin) {
       return axios({
         method: 'GET',
@@ -325,9 +327,9 @@ export const ContextProvider = props => {
         params: {
           vid: Number(id),
           authkey: token,
-          device: phone?'android':'android_stb',
+          device: "ios",
           client_id: 1,
-        //device_uid
+          device_uid
         },
       })
         .then(e => {
@@ -350,7 +352,7 @@ export const ContextProvider = props => {
           device: 'android_stb',
           client_id: 1,
           api_key: apiKey,
-        //device_uid
+          device_uid
         },
       })
         .then(e => {
@@ -367,7 +369,7 @@ export const ContextProvider = props => {
   };
 
   const getSrc = async (data,phone) => {
-    //const device_uid = await DeviceInfo.getMacAddress()
+   const device_uid = await Network.getIpAddressAsync()
     return axios({
       method: 'GET',
       url: `https://mw.tvcom.uz/tvmiddleware/api/video/url/`,
@@ -376,10 +378,10 @@ export const ContextProvider = props => {
         authkey: token,
         vfid: data.fileId,
         redirect:0,
-        device:phone?'android':'android_stb',
+        device:"ios",
         client_id:1,
         api_key:apiKey,
-        //device_uid
+        device_uid
       },
     })
       .then(e => {
@@ -395,7 +397,7 @@ export const ContextProvider = props => {
   };
 
   const searchFilm = async text => {
-    //const device_uid = await DeviceInfo.getMacAddress()
+   const device_uid = await Network.getIpAddressAsync()
     if (isLogin) {
       return axios({
         method: 'GET',
@@ -406,7 +408,7 @@ export const ContextProvider = props => {
           authkey:token,
           api_key:apiKey,
           device:'android_stb',
-        //device_uid
+          device_uid
         },
       })
         .then(e => {
@@ -441,7 +443,7 @@ export const ContextProvider = props => {
           limit: 20,
           api_key:apiKey,
           device:'android_stb',
-        //device_uid
+          device_uid
         },
       })
         .then(e => {
@@ -479,8 +481,9 @@ export const ContextProvider = props => {
     }else{
       token1 = token
     }
-    //const device_model = DeviceInfo.getModel()
-    //const device_uid = await DeviceInfo.getMacAddress()
+    
+    const device_uid = await Network.getIpAddressAsync()
+
     if (token1) {
       return await axios({
         method: 'GET',
@@ -488,9 +491,9 @@ export const ContextProvider = props => {
         params: {
           authkey: token1,
           client_id: 1,
-          device:phone?'android':'android_stb',
-          //device_uid,
-          // device_model
+          device:"ios",
+          device_uid,
+          device_model:Device.modelName
 
           
         },
@@ -559,7 +562,7 @@ export const ContextProvider = props => {
 
   const getChannelSrc = async (id,phone) => {
     if (isLogin == 1) {
-      //const device_uid = await DeviceInfo.getMacAddress()
+     const device_uid = await Network.getIpAddressAsync()
       return axios({
         method: 'GET',
         url: `https://mw.tvcom.uz/tvmiddleware/api/channel/url/`,
@@ -568,8 +571,8 @@ export const ContextProvider = props => {
           redirect:0,
           authkey:token,
           client_id:1,
-          device:phone?'android':'android_stb',
-        //device_uid
+          device:"ios",
+          device_uid
         },
       })
         .then(e => {
@@ -586,7 +589,7 @@ export const ContextProvider = props => {
   };
 
   const getTimeShift = async (cid, begin_time,phone) => {
-    //const device_uid = await DeviceInfo.getMacAddress()
+   const device_uid = await Network.getIpAddressAsync()
     if (isLogin == 1) {
       return axios({
         method: 'GET',
@@ -598,8 +601,8 @@ export const ContextProvider = props => {
           time: Math.trunc(begin_time),
           redirect: 0,
           client_id: 1,
-          device:phone?'android':'android_stb',
-        //device_uid
+          device:"ios",
+          device_uid
         },
       })
         .then(e => {
@@ -636,7 +639,7 @@ export const ContextProvider = props => {
     }
   };
   const getUserInfo = async (phone) => {
-    //const device_uid = await DeviceInfo.getMacAddress()
+   const device_uid = await Network.getIpAddressAsync()
     if (isLogin == 1) {
       return axios({
         method: 'GET',
@@ -645,8 +648,8 @@ export const ContextProvider = props => {
           authkey: token,
           client_id:1,
           api_key:apiKey,
-          device:phone?'android':'android_stb',
-        //device_uid
+          device:"android_stb",
+          device_uid
         },
       })
         .then(e => {
@@ -701,7 +704,7 @@ export const ContextProvider = props => {
   };
 
   const toggleLike = async (id, is_favorited,phone) => {
-    //const device_uid = await DeviceInfo.getMacAddress()
+   const device_uid = await Network.getIpAddressAsync()
     return axios({
       method: 'GET',
       url: `https://mw.tvcom.uz/tvmiddleware/api/video/settings/set`,
@@ -710,8 +713,8 @@ export const ContextProvider = props => {
         vid: id,
         is_favorited,
         client_id: 1,
-        device:phone?'android':'android_stb',
-        //device_uid
+        device:"ios",
+        device_uid
       },
     })
       .then(e => {
@@ -723,7 +726,7 @@ export const ContextProvider = props => {
   };
 
   const toggleLikeTV = async (condition, id,phone) => {
-    //const device_uid = await DeviceInfo.getMacAddress()
+   const device_uid = await Network.getIpAddressAsync()
     if (condition) {
       return axios({
         method: 'GET',
@@ -732,8 +735,8 @@ export const ContextProvider = props => {
           authkey: token,
           favorite_channel: id,
           client_id: 1,
-          device:phone?'android':'android_stb',
-        //device_uid
+          device:"ios",
+        device_uid
         },
       })
         .then(e => {
@@ -777,7 +780,7 @@ export const ContextProvider = props => {
   };
 
   const getPromo = async (promo,phone) => {
-    //const device_uid = await DeviceInfo.getMacAddress()
+   const device_uid = await Network.getIpAddressAsync()
     return axios({
       method: 'POST',
       url: `https://mw.tvcom.uz/tvmiddleware/api/promo/activate`,
@@ -786,8 +789,8 @@ export const ContextProvider = props => {
         code: promo,
         client_id:1,
         api_key:apiKey,
-        device:phone?'android':'android_stb',
-        //device_uid
+        device:"ios",
+        device_uid
       },
     })
       .then(e => {
@@ -804,7 +807,7 @@ export const ContextProvider = props => {
 
   const getPrice = async (tariff_id,phone) => {
 
-    ////const device_uid = await DeviceInfo.getMacAddress()
+    const device_uid = await Network.getIpAddressAsync()
 
     return axios({
       method: 'GET',
@@ -814,8 +817,8 @@ export const ContextProvider = props => {
         tariff_id,
         client_id:1,
         api_key:apiKey,
-        device:phone?'android':'android_stb',
-        //device_uid
+        device:"ios",
+        device_uid
       },
     })
       .then(e => {
@@ -831,7 +834,7 @@ export const ContextProvider = props => {
   };
 
   const buyTariff = async (tariff_id,phone) => {
-    ////const device_uid = await DeviceInfo.getMacAddress()
+    const device_uid = await Network.getIpAddressAsync()
     return axios({
       method: 'GET',
       url: 'https://mw.tvcom.uz/tvmiddleware/api/customer/tariff/subscribe',
@@ -840,8 +843,8 @@ export const ContextProvider = props => {
         tariff_id,
         client_id:1,
         api_key:apiKey,
-        device:phone?'android':'android_stb',
-        //device_uid
+        device:"ios",
+        device_uid
       },
     })
       .then(e => {
@@ -857,7 +860,7 @@ export const ContextProvider = props => {
   };
 
   const removeTariff = async (tariff_id,phone) => {
-    ////const device_uid = await DeviceInfo.getMacAddress()
+    const device_uid = await Network.getIpAddressAsync()
     return axios({
       method: 'GET',
       url: 'https://mw.tvcom.uz/tvmiddleware/api/customer/tariff/unsubscribe/',
@@ -866,8 +869,8 @@ export const ContextProvider = props => {
         tariff_id,
         client_id:1,
         api_key:apiKey,
-        device:phone?'android':'android_stb',
-        //device_uid
+        device:"ios",
+        device_uid
       },
     })
       .then(e => {
@@ -883,7 +886,7 @@ export const ContextProvider = props => {
   };
 
   const lastChannels = async (phone) => {
-    ////const device_uid = await DeviceInfo.getMacAddress()
+    const device_uid = await Network.getIpAddressAsync()
     return axios({
       method: 'GET',
       url: 'https://mw.tvcom.uz/tvmiddleware/api/channel/list/last?client_id=1&device=browser',
@@ -891,8 +894,8 @@ export const ContextProvider = props => {
         authkey: token,
         client_id:1,
         api_key:apiKey,
-        device:phone?'android':'android_stb',
-        //device_uid
+        device:"ios",
+        device_uid
       
       },
     })
@@ -936,7 +939,7 @@ export const ContextProvider = props => {
   };
 
   const getMesseges = async (phone) => {
-    ////const device_uid = await DeviceInfo.getMacAddress()
+    const device_uid = await Network.getIpAddressAsync()
     return axios({
       method: 'GET',
       url: `https://mw.tvcom.uz/tvmiddleware/api/message/list/?client_id=1`,
@@ -944,8 +947,8 @@ export const ContextProvider = props => {
         authkey: token,
         client_id: 1,
         api_key:apiKey,
-        device:phone?'android':'android_stb',
-        //device_uid
+        device:"ios",
+        device_uid
       },
     })
       .then(e => {
@@ -971,7 +974,7 @@ export const ContextProvider = props => {
   };
 
   const getMessegesDetail = async (uuid,phone) => {
-    ////const device_uid = await DeviceInfo.getMacAddress()
+    const device_uid = await Network.getIpAddressAsync()
     return axios({
       method: 'GET',
       url: `https://mw.tvcom.uz/tvmiddleware/api/message/detail/?client_id=1`,
@@ -980,8 +983,8 @@ export const ContextProvider = props => {
         authkey: token,
         client_id:1,
         api_key:apiKey,
-        device:phone?'android':'android_stb',
-        //device_uid
+        device:"ios",
+        device_uid
         
       },
     })

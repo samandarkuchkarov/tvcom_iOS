@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View,Text,SafeAreaView } from 'react-native';
+
+import { StyleSheet, View,Text,SafeAreaView, StatusBar } from 'react-native';
 import {ContextProvider} from './context';
 import Main from './navigation/MainNavigation';
 import { useFonts } from 'expo-font';
@@ -46,9 +46,9 @@ export default function App() {
 
   return (
   <>
-   
-   <SafeAreaView  style={styles.safe}/>
-    <StatusBar hidden={false} style="light"/>
+
+   <SafeAreaView shouldRasterizeIOS style={styles.safe}/>
+    <StatusBar barStyle={'light-content'}/>
     <ContextProvider>
       <Main/>
     </ContextProvider>

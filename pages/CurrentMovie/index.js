@@ -613,7 +613,7 @@ function CurrentMovie({ navigation, route }) {
                   {movie.name}
             </Text>
             <Text allowFontScaling={false}style={styles.desc}>
-              {movie.description.replaceAll('<p>','').replaceAll('&nbsp;',' ').replaceAll('</p>',' ').replaceAll('<br>',' ').replaceAll('&lt;','').replaceAll('p&gt;','').replaceAll('&amp;',' ').replaceAll('nbsp;',' ').replaceAll('/br&gt;  /',' ').replaceAll('./',' ').replaceAll('<strong>',' ').replaceAll('</strong>',' ')}
+              {movie&&movie.description.replaceAll('<p>','').replaceAll('&nbsp;',' ').replaceAll('</p>',' ').replaceAll('<br>',' ').replaceAll('&lt;','').replaceAll('p&gt;','').replaceAll('&amp;',' ').replaceAll('nbsp;',' ').replaceAll('/br&gt;  /',' ').replaceAll('./',' ').replaceAll('<strong>',' ').replaceAll('</strong>',' ')}
             </Text>
           </View>
 

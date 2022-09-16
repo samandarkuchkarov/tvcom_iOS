@@ -21,7 +21,7 @@ export default function ModalLastDay({modalData,setModalData,navigation}) {
                         <Text allowFontScaling={false}style={styles.backText}>Закрыть</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
+                <TouchableOpacity onPress={()=>{navigation.navigate('Profile');setModalData(false)}}>
                     <View style={styles.back}>
                         <Text allowFontScaling={false}style={styles.backText}>Перейти в личный кабинет</Text>
                     </View>

@@ -3,9 +3,10 @@ import axios from "axios";
 import base64 from "react-native-base64";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 //import DeviceInfo from 'react-native-device-info';
-
+import * as Device from 'expo-device';
+import * as Network from 'expo-network';
 export const getChannel =async (isLogin,token,apiKey,phone) => {
-    //const device_uid = await DeviceInfo.getMacAddress()
+   const device_uid = await Network.getIpAddressAsync()
     if (isLogin == 1) {
       return axios({
         method: 'GET',
@@ -15,7 +16,7 @@ export const getChannel =async (isLogin,token,apiKey,phone) => {
           client_id: 1,
           device:phone? 'android' : 'android_stb',
           api_key:apiKey,
-        //device_uid
+          device_uid
 
         },
       })
@@ -34,7 +35,7 @@ export const getChannel =async (isLogin,token,apiKey,phone) => {
 };
 
 export const getChannelInfo = async(search,token) => {
-  //const device_uid = await DeviceInfo.getMacAddress()
+ const device_uid = await Network.getIpAddressAsync()
   return axios({
     method: 'GET',
     url: `https://mw.tvcom.uz/tvmiddleware/api/channel/list/search/`,
@@ -44,7 +45,7 @@ export const getChannelInfo = async(search,token) => {
       client_id: 1,
       search,
       device:'android_stb',
-      //device_uid
+      device_uid
     },
   })
     .then(e => {
@@ -64,15 +65,15 @@ export const getChannelInfo = async(search,token) => {
 };
 
 export const logoutApi = async (token,phone) => {
-  //const device_uid = await DeviceInfo.getMacAddress()
+ const device_uid = await Network.getIpAddressAsync()
   return axios({
     method: 'GET',
     url: `https://mw.tvcom.uz/tvmiddleware/api/logout`,
     params:{
       authkey:token,
       client_id:1,
-      device: phone?'android':'android_stb',
-      //device_uid
+      device: "ios",
+      device_uid
     }
   })
     .then(e => {
@@ -118,17 +119,17 @@ export const login = async(data,apiKey,phone)=>{
   }
   params.client_id = 1
   params.api_key = apiKey
-  //const device_uid = await DeviceInfo.getMacAddress()
-  //const device_model =  DeviceInfo.getModel()
+ const device_uid = await Network.getIpAddressAsync()
+ 
   //const device_serial = DeviceInfo.getSerialNumber()
   return axios({
     method: 'GET',
     url: `https://mw.tvcom.uz/tvmiddleware/api/login`,
     params:{
       ...params,
-      device:phone?'android':"android_stb",
-      // device_uid,
-      // device_model,
+      device:"ios",
+      device_uid,
+      device_model:Device.modelName,
       // device_serial
     
     }}).then(async e => {
@@ -159,7 +160,7 @@ export const getApiKey = (apiKey,setApiKey) =>{
 }
 
 export const addViewed =  async(vid, assetsId, apiKey, token, phone) => {
-  //const device_uid = await DeviceInfo.getMacAddress()
+ const device_uid = await Network.getIpAddressAsync()
     return axios({
       method:'GET',
       url:'https://mw.tvcom.uz/tvmiddleware/api/content/position/set',
@@ -168,11 +169,11 @@ export const addViewed =  async(vid, assetsId, apiKey, token, phone) => {
         api_key:apiKey,
         client_id:1,
         position:10,
-        device:phone?'android':'android_stb',
+        device:"ios",
         content_id:vid,
         authkey:token,
         asset_id:assetsId?assetsId:null,
-        //device_uid,
+        device_uid,
       }
     }).then(e=>{
       if(typeof e.data ==='string'){
@@ -216,7 +217,7 @@ export const storeData = async (key, value) => {
   } catch (e) { }
 };
 export const resetPassword = async( mobile_phone_number, code, apiKey, phone ) =>{
-  //const device_uid = await DeviceInfo.getMacAddress()
+ const device_uid = await Network.getIpAddressAsync()
   return axios({
     method:'GET',
     url:'https://mw.tvcom.uz/tvmiddleware/api/account/reset_password',
@@ -225,8 +226,8 @@ export const resetPassword = async( mobile_phone_number, code, apiKey, phone ) =
       api_key:apiKey,
       client_id:1,
       code:code?code:null,
-      device:phone?'android':'android_stb',
-      //device_uid
+      device:"ios",
+      device_uid
     }
   }).then(e=>{
     if(typeof e.data ==='string'){
@@ -240,7 +241,7 @@ export const resetPassword = async( mobile_phone_number, code, apiKey, phone ) =
 }
 
 export const getSubscriptionList = async (setToken,setLogin,apiKey,token,phone) => {
-  //const device_uid = await DeviceInfo.getMacAddress()
+ const device_uid = await Network.getIpAddressAsync()
   let token1
     if(!token){
       let result = await getData('token',setToken,setLogin)
@@ -259,8 +260,8 @@ export const getSubscriptionList = async (setToken,setLogin,apiKey,token,phone) 
         authkey: token1,
         api_key: apiKey,
         client_id: 1,
-        device:phone?'android':'android_stb',
-        //device_uid
+        device:"ios",
+        device_uid
       }
     }).then(e => {
       if (typeof e.data == 'string') {
@@ -321,7 +322,7 @@ export const setVideoPosition = async ({content_type = "video",content_id,positi
     method: 'GET',
     url: `https://mw.tvcom.uz/tvmiddleware/api/content/position/set/`,
     params:{
-        device: phone?"android":"android_stb",
+        device:"ios",
         content_type,
         content_id,
         position:position.toFixed(0),

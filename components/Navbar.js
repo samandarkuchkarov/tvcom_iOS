@@ -1,12 +1,12 @@
 import React from 'react';
-import {Image, StatusBar, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
+import {Image, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import ImageButton from './UI/ImageButton';
 import Space from './UI/Space';
 
 export default function Navbar({ref2}) {
   return (
     <View style={styles.navbar}>
-      <StatusBar backgroundColor="#1C1C1C" barStyle={'light-color'} />
+      {/* <StatusBar backgroundColor="#1C1C1C" barStyle={'light-color'} /> */}
       <TouchableWithoutFeedback onPress={()=>{console.log(ref2)}}>
       <Image
         style={styles.logo}
