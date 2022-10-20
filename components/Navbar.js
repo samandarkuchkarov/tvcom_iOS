@@ -1,13 +1,14 @@
-import React from 'react';
-import {Image, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {Image, StatusBar, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import ImageButton from './UI/ImageButton';
 import Space from './UI/Space';
 
+
 export default function Navbar({ref2}) {
+
   return (
     <View style={styles.navbar}>
-      {/* <StatusBar backgroundColor="#1C1C1C" barStyle={'light-color'} /> */}
-      <TouchableWithoutFeedback onPress={()=>{console.log(ref2)}}>
+      <TouchableWithoutFeedback>
       <Image
         style={styles.logo}
         source={require('../assets/images/Logo.png')}
@@ -15,17 +16,31 @@ export default function Navbar({ref2}) {
 
       </TouchableWithoutFeedback>
       <View style={styles.right}>
-        <ImageButton
-          onPress={()=>ref2.current.navigate('Search')}
-          height={23}
-          src={require('../assets/images/search.png')}
-        />
-        <Space width={20} />
-        <ImageButton
-          onPress={()=>ref2.current.navigate('Filter')}
-          height={23}
-          src={require('../images/filterMovies.png')}
-        />
+        
+          <ImageButton
+            onPress={()=>ref2.current.navigate('Megogo')}
+            height={23}
+            src={require('../images/amedia1.png')}
+          />
+          <Space width={15} />
+        
+          <ImageButton
+            onPress={()=>ref2.current.navigate('Amedia')}
+            height={23}
+            src={require('../images/megogo1.png')}
+          />
+          <Space width={15} />
+          <ImageButton
+            onPress={()=>ref2.current.navigate('Search')}
+            height={23}
+            src={require('../assets/images/search.png')}
+          />
+          <Space width={20} />
+          <ImageButton
+            onPress={()=>ref2.current.navigate('Filter')}
+            height={23}
+            src={require('../images/filterMovies.png')}
+          />
       </View>
     </View>
   );

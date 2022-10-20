@@ -88,7 +88,7 @@ export default function PlayerChannel({channel,programData,setProgramData,allPro
         if (current.has_subscription) {
           if(current.program_id){
             let time = await getTime() 
-            const data ={uri: await getChannelSrc(current.id,true)}
+            const data = await getTimeShift(current.id,current.program_begin_time,true);
             
             if(render&&data.uri){
               setTimer(time);

@@ -7,6 +7,7 @@ import * as Device from 'expo-device';
 import * as Network from 'expo-network';
 export const getChannel =async (isLogin,token,apiKey,phone) => {
    const device_uid = await Network.getIpAddressAsync()
+   
     if (isLogin == 1) {
       return axios({
         method: 'GET',
@@ -119,7 +120,7 @@ export const login = async(data,apiKey,phone)=>{
   }
   params.client_id = 1
   params.api_key = apiKey
- const device_uid = await Network.getIpAddressAsync()
+  const device_uid = await Network.getIpAddressAsync()
  
   //const device_serial = DeviceInfo.getSerialNumber()
   return axios({

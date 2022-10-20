@@ -12,7 +12,6 @@ import TvList from '../pages/TvList';
 import CurrentTv from '../pages/CurrentChannel';
 import Profile from '../pages/Profile';
 import Authentication from '../pages/Authentication';
-import { StatusBar } from 'expo-status-bar';
 import MovieNavigation from './MoviesNavigation';
 import Filter from '../pages/Filter';
 import MovieList from '../pages/MovieList';
@@ -24,6 +23,9 @@ import PayMethods from '../pages/PayMethods';
 import PodpiskaMovie from '../pages/PodpiskaMovie';
 import PodpiskaTv from '../pages/PodpiskaTv';
 import Answers from '../pages/Answers';
+import Amedia from '../pages/Amedia'
+import Megogo from '../pages/Megogo'
+import Agreement from '../pages/Agreement'
 // import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 
@@ -64,6 +66,10 @@ export default function Main() {
           <Stack.Screen options={{animationEnabled:false}}  name="PodpiskaTv" component={PodpiskaTv} />
           <Stack.Screen options={{animationEnabled:false}}  name="Answers" component={Answers} />
           <Stack.Screen options={{animationEnabled:false}}  name="CurrentTv" component={CurrentTv} />
+          <Stack.Screen options={{animationEnabled:false}}  name="Amedia" component={Amedia} />
+          <Stack.Screen options={{animationEnabled:false}}  name="Megogo" component={Megogo} />
+          <Stack.Screen options={{animationEnabled:false}}  name="Agreement" component={Agreement} />
+          
           {/* 
            */}
       </Stack.Navigator>

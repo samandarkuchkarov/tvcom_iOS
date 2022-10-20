@@ -129,11 +129,13 @@ export default function Registration({navigation}) {
                     onPress={() => {setCheck(i=>!i)}}
                     />
                 </View>
-                <View style={styles.focusagreement}>
-                    <View style={styles.absolute}>
-                        <Text allowFontScaling={false}style={styles.text}>Я принимаю условия пользовательского соглашения</Text>
-                    </View>
-                </View>
+                <TouchableOpacity onPress={()=>navigation.navigate('Agreement')}>
+                  <View style={styles.focusagreement}>
+                      <View style={styles.absolute}>
+                          <Text allowFontScaling={false}style={styles.text}>Я принимаю условия пользовательского соглашения</Text>
+                      </View>
+                  </View>
+                </TouchableOpacity>
             </View>
         </View>
     </View>

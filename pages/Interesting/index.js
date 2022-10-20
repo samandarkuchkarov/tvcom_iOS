@@ -132,6 +132,7 @@ export default function Interesting({navigation}) {
           <Text allowFontScaling={false}style={styles.text}>Здесь будет ваша история просмотров и понравившиеся вам фильмы</Text>
         </View>
       </>:<>
+      <View style={{marginTop:10}}/>
       {isLogin&&data.length?<>
         {data.map((item,index)=>{
           return(

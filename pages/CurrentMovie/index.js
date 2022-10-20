@@ -384,7 +384,7 @@ function CurrentMovie({ navigation, route }) {
   }
 
   const backAction = async (e) =>{
-    console.log(111111111)
+
     
     return 1
     
