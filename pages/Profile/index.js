@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Image, ScrollView, Text, TouchableWithoutFeedback, View, TextInput, Dimensions, TouchableOpacity, ActivityIndicator, RefreshControl } from 'react-native';
+import { Image, ScrollView, Text, TouchableWithoutFeedback, View, TextInput, Dimensions, TouchableOpacity, ActivityIndicator, RefreshControl, Keyboard } from 'react-native';
 import { globalStyles } from '../../utils/constants';
+import PrimaryButton from '../../components/UI/Buttons/Primary';
 import { Datas } from '../../context';
 import styles from './style';
 import { storeData, logoutApi, getData } from '../../Api';
@@ -125,6 +126,7 @@ const unsubscribe = async () => {
       setMessage(status);
   }
 };
+
 const action = () => {
   if (chosedTariff.is_assigned == '1') {
     if(showUnsubModal){
@@ -155,7 +157,6 @@ React.useEffect(() => {
         setUserData(userData);
         setMonthly(userData.monthly_payment)
         let aviableTariffs = userData.tariffs.item;
-        console.log(userData)
         tariffs = tariffs.map(item => {
           let New = {...item}
           let currentTariff = aviableTariffs.filter(
@@ -334,8 +335,8 @@ const onRefresh = async()=>{
       refreshing={refreshing}
       onRefresh={onRefresh}
     />}
-    style={globalStyles.container}>
-      
+    style={{...globalStyles.container,zIndex:2}}>
+       {/* <QrPay/> */}
      {tariffs.all&&userData&&debtStatus&&isLogin&&debtDel&&!modalVisible&&!message?<DebtModal debtDel={debtDel} setDebtDel={setDebtDel} tariffs={tariffs.all} userData={userData} monthly={monthly}/>:<></>}
      {alert?<ModalToken  navigation={navigation}/>:<></>}
      {!alert&&PromoMessage&&!modalVisible?<PromoModal PromoMessage={PromoMessage} setPromoMessage={setPromoMessage}/>:<></>}
@@ -344,25 +345,25 @@ const onRefresh = async()=>{
       
       {isLogin==1&&userData?<>
       <View style={styles.content}>
-        <View>
-          <Text allowFontScaling={false}style={styles.phone}>{phone}</Text>
-          <Text allowFontScaling={false}style={styles.abon}>Абонемент {userData&&userData.abonement}</Text>
-        </View>         
+        <Image style={styles.user} source={require('../../images/user.png')}/>
+        <Text allowFontScaling={false}style={styles.phone}>{phone}</Text>
         <TouchableOpacity onPress={logout}>
           <View style={styles.back}>
             <Image style={styles.logout} source={require('../../images/logout.png')}/>
             <Text allowFontScaling={false}style={styles.backText}>Выход</Text>
           </View>
         </TouchableOpacity>
-      </View>
-      <View style={styles.greyContent}>
         <View style={styles.full}>
           <Text allowFontScaling={false}style={styles.balance}>На лицевом счете:</Text>
           <Text allowFontScaling={false}style={styles.balance1}>{userData.balance} сум</Text>
         </View>
         <View style={styles.full}>
+          <Text allowFontScaling={false}style={styles.balance}>Абонемент</Text>
+          <Text allowFontScaling={false}style={styles.balance}>{userData&&userData.abonement}</Text>
+        </View>
+        <View style={styles.full}>
           <Text allowFontScaling={false}style={styles.balance}>Ежемесячный платеж:</Text>
-          <Text allowFontScaling={false}style={styles.balance1}>{monthly} сум</Text>
+          <Text allowFontScaling={false}style={styles.balance}>{monthly} сум</Text>
         </View>
       </View>
       </>:<></>}
@@ -373,13 +374,14 @@ const onRefresh = async()=>{
           isLogin={isLogin}
         />
 
-      <View style={styles.textAreaContent}>
+      {isLogin==1?<View style={styles.textAreaContent}>
         <Text allowFontScaling={false}style={styles.titleArea}>Активация промокода </Text>
         <View style={styles.greyContent2}>
         <TextInput
           style={styles.input}
           onChangeText={setPromo}
           value={promo}
+          onSubmitEditing={(e)=>Keyboard.dismiss()}
         />
         <TouchableOpacity onPress={submitPromo}>
           <View style={styles.activePromo}>
@@ -387,7 +389,7 @@ const onRefresh = async()=>{
           </View>
         </TouchableOpacity>
         </View>
-      </View>
+      </View>:<></>}
 
       <View style={styles.btnList}>
         <TouchableWithoutFeedback onPress={()=>navigation.navigate('Devices')}>
@@ -411,6 +413,7 @@ const onRefresh = async()=>{
       </>:<>
         <ActivityIndicator size={'large'} color='#fff'/>
       </>}
+      <TextInput style={{fontSize:0}}/>
     </ScrollView>
   );
 }

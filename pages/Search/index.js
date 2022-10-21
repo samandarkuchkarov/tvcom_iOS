@@ -1,10 +1,14 @@
 import React, {useState,useEffect,useContext} from 'react'
-import { View, Image, TextInput, Text } from 'react-native'
+import { View, Image, TextInput, Text, Keyboard, FlatList, Dimensions, ActivityIndicator } from 'react-native'
 import styles from './style'
 import { Datas } from '../../context';
-import FilmCaruselPhone from '../../components/FilmCaruselPhone';
+import FilmCardPhone from '../../components/FilmCardPhone';
 import { getSubscriptionList } from '../../Api';
 import ModalToken from '../../components/ModalToken';
+
+const {width} = Dimensions.get('window');
+let numColoms = Math.trunc((width - 10) / (170+10));
+numColoms = numColoms==1?2:numColoms
 
 export default function Search({navigation}) {
 
@@ -32,7 +36,7 @@ export default function Search({navigation}) {
     let render = true;
     const fetch = async () => {
         if (text.length >= 3) {
-        let movieContent = await searchFilm(text);
+        let movieContent = await searchFilm(text,40);
         if (render) {
             setMovieContent(movieContent);
             setResult(true)
@@ -40,7 +44,7 @@ export default function Search({navigation}) {
         } else {
             let movieContent = await getFilms({
                 order:'-average_customers_rating',
-                limit:16,
+                limit:32,
                 device:'android'
             });
             setResult(false)
@@ -95,39 +99,65 @@ export default function Search({navigation}) {
       };
       fetch();
     }, [navigation]);
-
+  
+    function renderItem({item,index}) {
+      return (
+        <View style={styles.content}>
+          <FilmCardPhone
+            isLogin={isLogin}
+            onPress={()=>{navigation.navigate('CurrentMovie',item)}}
+            providerIcons={providerIcons}
+            subscriptions={subscriptions}
+            item={item}
+            navigation={navigation}
+          />
+  
+        </View>
+      );
+    }
+  
 
   return (
     <View style={styles.wrapper}>
       {alert?<ModalToken navigation={navigation}/>:<></>}
         <View style={styles.textAreContent}>
-            <Image source={require('../../assets/images/search.png')} style={styles.searchIcon}/>
+            <Image source={require('../../images/Search.png')} style={styles.searchIcon}/>
             <TextInput
                 style={styles.input}
                 onChangeText={onChangeText}
                 value={text}
+                blurOnSubmit={true}
+                onSubmitEditing={(e)=>Keyboard.dismiss()}
                 placeholderTextColor='#bcbcbc'
                 placeholder="Фильм, сериал или шоу"
             />
         </View>
+          <TextInput
+              style={{height:0,fontSize:0}}
+          />
 
-        
-          {providerIcons?<FilmCaruselPhone
-            rating={false}
-            key={subscriptions?subscriptions.length:''}
-            providerIcons={providerIcons}
-            subscriptions={subscriptions}
-            navigation={navigation}
-            params={{search:text}}
-            name={result?'Все Результаты':'Рекомендуем к просмотру:'}
-            movieContent={movieContent}
-            isLogin={isLogin}
-          />:<></>}
-          {text.length!==0&&movieContent.length==0?<>
-            <Text allowFontScaling={false}style={styles.empty}>
-              Ничего не нашлось
-            </Text>
-          </>:<></>}
+          <View style={{marginTop:0,marginBottom:100}}>
+            {providerIcons&&movieContent&&movieContent.length!=0?
+            <FlatList
+              data={movieContent}
+              renderItem={renderItem}
+              columnWrapperStyle={{width:width-10,marginLeft:5}}
+              onEndReachedThreshold={0.1}
+              numColumns={numColoms}
+              ListHeaderComponent={<>
+                <Text style={styles.title}>{result?'Все Результаты':'Рекомендуем к просмотру:'}</Text>
+              </>}
+              keyExtractor={(item,index) => {
+                return`${index} ${isLogin} ${subscriptions&&subscriptions.length}`}}
+            />
+            :<></>}
+            {text.length!==0&&movieContent&&movieContent.length==0?<>
+              <Text allowFontScaling={false}style={styles.empty}>
+                Ничего не нашлось
+              </Text>
+            </>:<></>}
+
+          </View>
           
     </View> 
   )

@@ -12,7 +12,7 @@ const { width, height } = Dimensions.get('window');
 export default function PlayerChannel({channel,programData,setProgramData,allProgram,setAllProgram,isFullScreen,setFullScreen,timeData,setTimeData,setLive,live,change,setChange,timer,setTimer,disableTimeShift, setDisableTimeShift,fetchTimeShift,uri,setUri,setCurrentChannel,currentChannel}) {
     const video = useRef()
     const [isPouse,setPouse] = useState(false)
-    const { getChannelSrc, setTabbarVisible, isLogin, token, apiKey, getProgramListByDay,getTimeShift } = useContext(Datas)
+    const { getChannelSrc, setTabbarVisible, isLogin, token, apiKey, getProgramListByDay,getTimeShift, isWorld } = useContext(Datas)
     const [currentId,setCurrentId] = useState()
     const [channelList,setChannelList] = useState({
       all:[],
@@ -52,8 +52,8 @@ export default function PlayerChannel({channel,programData,setProgramData,allPro
     },[channel])
 
     const getChannelList = async() => {
-        let data = await getChannel(isLogin,token,apiKey,true);
-        let icons = await getFullChannels()
+        let data = await getChannel(isLogin,token,apiKey,true,isWorld);
+        let icons = await getFullChannels(isWorld)
         if(data&&icons){
           for(let i = 0;i<data.length;i++){
             icons = icons.filter(item=>item.id!=data[i].id)

@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "tvcom",
-    "slug": "tvcom",
+    "name": "TVCOM TELEVISION",
+    "slug": "tvcom-television",
     "version": "1.0.0",
+    "owner": "tvcom",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -20,7 +21,7 @@
     "ios": {
       "supportsTablet": true,
       "requireFullScreen": true,
-      "bundleIdentifier": "no"
+      "bundleIdentifier": "com.tvcom.apple"
     },
     "android": {
       "adaptiveIcon": {

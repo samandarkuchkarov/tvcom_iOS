@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {View, Text, Image, FlatList,Dimensions, TouchableOpacity} from 'react-native';
 import styles from './style';
 import FilmCardPhone from '../FilmCardPhone';
+import { Datas } from '../../context';
 
 const {width, height} = Dimensions.get('window');
 
 export default function FilmCaruselPhone({movieContent,isLogin,subscriptions,providerIcons,name,navigation,SecondFunc,push,params}) {
     
-    
+    const {isWorld} = useContext(Datas)
     const onPress = (item) =>{
         if(push){
             navigation.push('CurrentMovie',item)
@@ -28,13 +29,13 @@ export default function FilmCaruselPhone({movieContent,isLogin,subscriptions,pro
                 </View> 
     }
 
-    
+    const listData = isWorld?movieContent.filter(i=>i.video_provider_id==1||i.video_provider_id==2):movieContent
     return (
         <View style={styles.container}>
             <Text allowFontScaling={false} style={styles.title}>{name}</Text>
-            {movieContent&&movieContent.length?
+            {listData&&listData.length?
             <FlatList
-                data={movieContent}
+                data={listData}
                 renderItem={renderItem}
                 keyExtractor={item => { return item.id}}
                 horizontal={true}

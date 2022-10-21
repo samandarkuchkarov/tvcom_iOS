@@ -8,11 +8,12 @@ import TvCarusel from '../../components/TvCarusel';
 import FilmCarusel from '../../components/FilmCaruselPhone';
 import ModalToken from '../../components/ModalToken/index.js';
 import ModalLastDay from '../../components/ModalLastDay/index.js';
+import { checkWorld } from '../../Api';
 
 
 export default function Home({navigation}) {
 
-  const {checkToken,isLogin,getCinema,getChannelIcons,token,apiKey,setToken,setLogin,getUserInfo} = useContext(Datas);
+  const {checkToken,isLogin,getCinema,getChannelIcons,token,apiKey,setToken,setLogin,getUserInfo, isWorld, setWorld} = useContext(Datas);
   
   const [change, setChange] = useState(-1);
   const [alert,setAlert] = useState(false)
@@ -22,6 +23,28 @@ export default function Home({navigation}) {
   const [listCarusel,setListCarusel] = useState([])
   const [dataLastDay,setDataLastDay] = useState()
 
+  useEffect(() => {
+    const fetch =async ()=>{
+      const response = await checkWorld()
+      if(response.message){
+        await setWorld(false)
+      }else{
+        await  setWorld(true)
+      }
+    }
+    fetch()
+    const unsubscribe = navigation.addListener('focus', async () => {
+      setChange(i => {
+        if (i === -1) {
+          return false;
+        } else {
+          return !i;
+        }
+      });
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
     useEffect(()=>{
     const fetch = async() => {
@@ -51,19 +74,6 @@ export default function Home({navigation}) {
     }
   },[subscriptions])
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', async () => {
-      setChange(i => {
-        if (i === -1) {
-          return false;
-        } else {
-          return !i;
-        }
-      });
-    });
-
-    return unsubscribe;
-  }, [navigation]);
  
   useEffect(()=>{
     let render = true
@@ -116,7 +126,7 @@ export default function Home({navigation}) {
       let data = await getChannelIcons();
       let allData
       if(log){ 
-        allData = await getChannel(log,token,apiKey,true);
+        allData = await getChannel(log,token,apiKey,true,isWorld);
       }
 
       let podborka = await getPodborkaChannels()

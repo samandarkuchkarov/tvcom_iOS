@@ -12,7 +12,7 @@ const {width} = Dimensions.get('window');
 
 export default function TvList({navigation}) {
 
-    const { isLogin,janrTv,setJanrTv,token,apiKey,lastChannels,getJanr,toggleLikeTV, checkToken, setToken, setLogin } = useContext(Datas)
+    const { isLogin,janrTv,setJanrTv,token,apiKey,lastChannels,getJanr,toggleLikeTV, checkToken, setToken, setLogin, isWorld } = useContext(Datas)
 
     const [tvlist,setTvlist] = useState({all:[],filtered:[]})
     const [mounted,setMounted] = useState(false)
@@ -54,10 +54,10 @@ export default function TvList({navigation}) {
       let render = true;
       const fetch = async () => {
         
-        let data = await getFullChannels();
+        let data = await getFullChannels(isWorld);
         let allData;
         if(isLogin===1){
-          allData = await getChannel(isLogin,token,apiKey,true);
+          allData = await getChannel(isLogin,token,apiKey,true,isWorld);
         }
   
         let arr = [];

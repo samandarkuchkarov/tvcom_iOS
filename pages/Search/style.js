@@ -1,5 +1,7 @@
 import { StyleSheet, Dimensions } from "react-native";
 const {width} = Dimensions.get('window');
+let numColoms = Math.trunc((width - 10) / (170+10));
+numColoms = numColoms==1?2:numColoms
 
 const styles = StyleSheet.create({
     wrapper:{
@@ -45,6 +47,19 @@ const styles = StyleSheet.create({
         fontFamily:'Montserrat-Bold',
         width:width,
         textAlign:'center',
+    },
+    content: {
+        width:(width-10)/numColoms,
+        alignItems:'center',
+        justifyContent:'center',
+        marginBottom:5
+    },
+    title:{
+        color:'#fff',
+        marginLeft:10,
+        marginBottom:10,
+        marginTop:10,
+        fontSize:18
     }
 });
 

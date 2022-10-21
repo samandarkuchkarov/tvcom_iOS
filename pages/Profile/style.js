@@ -42,9 +42,9 @@ const styles = StyleSheet.create({
         width:width-20,
         marginLeft:10,
         marginBottom:15,
-        justifyContent:'space-between',
-        flexDirection:'row',
-        alignItems:'center'
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:20
     },
     greyContent:{
         paddingHorizontal:20,
@@ -113,9 +113,14 @@ const styles = StyleSheet.create({
     },
     full:{
         flexDirection:'row',
-        width:'100%',
+        width:width-20,
         justifyContent:'space-between',
-        alignItems:'center'
+        alignItems:'center',
+        backgroundColor:'#1c1c1c',
+        paddingVertical:10,
+        paddingHorizontal:15,
+        marginTop:10,
+        borderRadius:7
     },
     back:{
         paddingRight:20,
@@ -136,6 +141,12 @@ const styles = StyleSheet.create({
         width:50,
         height:50,
         marginRight:7
+    },
+    user:{
+        width:56,
+        height:56,
+        resizeMode:'contain',
+        marginBottom:10
     }
 
 });

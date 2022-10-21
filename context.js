@@ -21,6 +21,7 @@ export const ContextProvider = props => {
   const [navigation, setNavigation] = React.useState(false);
   const [returnRoute, setRoute] = React.useState('HomePhone');
   const [apiKey,setApiKey] = React.useState()
+  const [isWorld,setWorld] = useState(false)
 
 
     React.useEffect(()=>{
@@ -128,6 +129,7 @@ export const ContextProvider = props => {
           data: {
             token: token1,
             ...params,
+            video_provider_id:isWorld?'1,2':params.video_provider_id,
             
           },
         }).then(e => {
@@ -158,6 +160,7 @@ export const ContextProvider = props => {
             device:'android_stb',
             device_uid,
             ...params,
+            video_provider_id:isWorld?'1,2':params.video_provider_id,
           },
         }).then(e => {
             if (typeof e.data == 'string') {
@@ -190,6 +193,7 @@ export const ContextProvider = props => {
           url: `http://play.tvcom.uz:8008/api/genre/list`,
           data: {
             ...params,
+            video_provider_id:isWorld?'1,2':params.video_provider_id,
           },
         }).then(e => {
             let data = e.data.data
@@ -216,6 +220,7 @@ export const ContextProvider = props => {
             device:'android_stb',
             device_uid,
             ...params,
+            video_provider_id:isWorld?'1,2':params.video_provider_id,
           },
         })
           .then(e => {
@@ -266,7 +271,8 @@ export const ContextProvider = props => {
             ...params,
             api_key:apiKey,
             device:'android_stb',
-            device_uid
+            device_uid,
+            video_provider_id:isWorld?'1,2':null,
 
           },
         }).then(e => {
@@ -308,6 +314,7 @@ export const ContextProvider = props => {
         limit: 28,
         token,
         order: '-average_customers_rating',
+        video_provider_id:isWorld?'1,2':null
       },
     })
       .then(e => {
@@ -408,7 +415,8 @@ export const ContextProvider = props => {
           authkey:token,
           api_key:apiKey,
           device:'android_stb',
-          device_uid
+          device_uid,
+          video_provider_id:isWorld?'1,2':null
         },
       })
         .then(e => {
@@ -443,7 +451,8 @@ export const ContextProvider = props => {
           limit: 20,
           api_key:apiKey,
           device:'android_stb',
-          device_uid
+          device_uid,
+          video_provider_id:isWorld?'1,2':null,
         },
       })
         .then(e => {
@@ -1064,6 +1073,8 @@ export const ContextProvider = props => {
         setDebtStatus,
         tabBarVisible,
         setTabbarVisible,
+        isWorld,
+        setWorld
       }}>
       {children}
     </Datas.Provider>

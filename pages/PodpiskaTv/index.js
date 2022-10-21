@@ -12,7 +12,7 @@ const {width} = Dimensions.get('window');
 
 export default function PodpiskaTv({navigation}) {
 
-    const { isLogin, checkToken, getUserInfo, removeTariff, getPrice, getTariffs, buyTariff } = useContext(Datas)
+    const { isLogin, checkToken, getUserInfo, removeTariff, getPrice, getTariffs, buyTariff, isWorld } = useContext(Datas)
 
     const [tvlist,setTvlist] = useState({all:[],filtered:[]})
     const [mounted,setMounted] = useState(false)
@@ -118,7 +118,7 @@ export default function PodpiskaTv({navigation}) {
       let render = true;
       const fetch = async () => {
         
-        let data = await getFullChannels();
+        let data = await getFullChannels(isWorld);
         let freeChannels = [4,1,137,42,67,51,50,49,53,60,56,58,54,62,84,52,15,55]
         for(let i = 0;i<freeChannels.length;i++){
             data = data.filter(item=>item.id!=freeChannels[i])

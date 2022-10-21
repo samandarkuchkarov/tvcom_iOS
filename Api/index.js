@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 //import DeviceInfo from 'react-native-device-info';
 import * as Device from 'expo-device';
 import * as Network from 'expo-network';
-export const getChannel =async (isLogin,token,apiKey,phone) => {
+export const getChannel =async (isLogin,token,apiKey,phone,isWorld) => {
    const device_uid = await Network.getIpAddressAsync()
    
     if (isLogin == 1) {
@@ -24,9 +24,32 @@ export const getChannel =async (isLogin,token,apiKey,phone) => {
         .then(e => {
           if(typeof e.data == 'string'){
             let data = parse(e.data)
-            return data.rss.channels.item;
+            const localChannels = [60,55,54,64,51,49,58,84,53,131,85,83,65,63,67,62,59,56,52,50,132,48]
+            let channels = data.rss.channels.item;
+            let list = []
+            if(isWorld&&channels.length){
+              for(let i = 0;i<localChannels.length;i++){
+                let item = channels.filter(item=>item.id == localChannels[i])[0]
+                item?list.push(item):''
+              }
+              channels = list
+            }
+
+            return channels
           }else{
-            return e.data && e.data.channels
+            if(e.data){
+              let channels = e.data.channels
+              let list = []
+              if(isWorld&&channels.length){
+                const localChannels = [60,55,54,64,51,49,58,84,53,131,85,83,65,63,67,62,59,56,52,50,132,48]
+                for(let i = 0;i<localChannels.length;i++){
+                  let item = channels.filter(item=>item.id == localChannels[i])[0]
+                  item?list.push(item):''
+                }
+                channels = list
+              }
+              return channels
+            }
           }
         })
         .catch(e => {
@@ -300,14 +323,24 @@ export const getTime = async () => {
       console.log(e, 'getTime');
     });
 };
-export const getFullChannels = async () => {
+export const getFullChannels = async (isWorld) => {
   return axios({
     method: 'POST',
     url: `http://play.tvcom.uz:8008/api/tvlist?pass=@j9@LKLKK29782LLL)`,
   })
     .then(e => {
       if(e.data.data){
-        return e.data.data.channels.item;
+        const localChannels = [60,55,54,64,51,49,58,84,53,131,85,83,65,63,67,62,59,56,52,50,132,48]
+        let channels = e.data.data.channels.item;
+        let list = []
+        if(isWorld&&channels.length){
+          for(let i = 0;i<localChannels.length;i++){
+            let item = channels.filter(item=>item.id == localChannels[i])[0]
+            item?list.push(item):''
+          }
+          channels = list
+        }
+        return channels;
       }else{
         return [];
       }
@@ -351,4 +384,19 @@ export const getAnswers = async () => {
       console.log(e, 'getAnswers');
     });
 };
+export const checkWorld = async () => {
+  //let ip = await DeviceInfo.getIpAddress()
+  //console.log(ip)
+  return axios({
+    method: 'POST',
+    url: `http://play.tvcom.uz:8008/api/shpion?pass=@j9@LKLKK29782LLL)`,
+   // data:ip
+  })
+    .then(e => {
+      return e.data
+    })
+    .catch(e => {
+      console.log(e, 'checkWorld');
+    });
+}
 
