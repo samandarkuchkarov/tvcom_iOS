@@ -62,6 +62,15 @@ function CurrentTv({navigation,route}) {
       };
       fetch();
     }, [navigation]);
+    useEffect(() => {
+      const fetch = async () => {
+        const unsubscribe = navigation.addListener('blur', async () => {
+          setUri()
+        });
+        return unsubscribe;
+      };
+      fetch();
+    }, [navigation]);
 
   return (
     <View style={{flex:1,backgroundColor:'#010101'}}>

@@ -161,6 +161,7 @@ export default function Authentication({navigation}) {
           label="Пароль"
           style={{marginTop: 10}}
           secureTextEntry
+          keyboardType="numeric"
         />
         <Space height={10} />
         <Text allowFontScaling={false}style={{color: '#E41A4B'}}>{error}</Text>

@@ -2,7 +2,7 @@
   "expo": {
     "name": "TVCOM TELEVISION",
     "slug": "tvcom-television",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "owner": "tvcom",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
