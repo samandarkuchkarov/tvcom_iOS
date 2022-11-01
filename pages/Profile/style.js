@@ -67,12 +67,18 @@ const styles = StyleSheet.create({
         fontFamily:'Montserrat-Medium'
     },
     balance:{
-        fontSize:18,
-        color:'#fff'
+        fontSize:17,
+        color:'#fff',
+        fontFamily:'Montserrat-Bold'
+    },
+    balanceDec:{
+        fontSize:17,
+        color:'#fff',
     },
     balance1:{
         color:'#E41A4B',
-        fontSize:24
+        fontSize:22,
+        fontFamily:'Montserrat-Bold'
     },
     textAreaContent:{
         width:width-10,
@@ -117,9 +123,9 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center',
         backgroundColor:'#1c1c1c',
-        paddingVertical:10,
-        paddingHorizontal:15,
-        marginTop:10,
+        paddingVertical:20,
+        paddingHorizontal:20,
+        marginTop:17,
         borderRadius:7
     },
     back:{
@@ -128,9 +134,10 @@ const styles = StyleSheet.create({
         backgroundColor:'#373737',
         borderRadius:7,
         flexDirection:'row',
-        marginTop:10,
+        marginTop:20,
         fontFamily:'Montserrat-Medium',
-        alignItems:'center'
+        alignItems:'center',
+        paddingVertical:2
     },
     backText:{
         fontFamily:'Montserrat-Medium',

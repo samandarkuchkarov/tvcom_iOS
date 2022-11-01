@@ -34,6 +34,7 @@ export default function PodpiskaMovie({navigation,route}) {
   const [modalVisible, setModalVisible] = useState(false);
   const [tariff,setTariff] = useState()
   const [showUnsubModal,setShowUnsubModal] = useState(false)
+  const [userData,setUserData] = useState()
 
   useEffect(() => {
     const fetch = async () => {
@@ -214,7 +215,10 @@ export default function PodpiskaMovie({navigation,route}) {
     const fetch = async() => {
         let tariffs = await getTariffs();
         const userData = await getUserInfo();
+        const abonement = await getData('abonement')
+        userData.abonement =abonement.number
         if(userData&&tariffs){
+          setUserData(userData)
           let aviableTariffs = userData.tariffs.item;
           tariffs = tariffs.map(item => {
             let New = {...item}
@@ -273,7 +277,7 @@ export default function PodpiskaMovie({navigation,route}) {
   return (
     <View style={globalStyles.container}>
        {alert?<ModalToken navigation={navigation}/>:<></>}
-       {!alert?<TariffModal  showUnsubModal={showUnsubModal} setShowUnsubModal={setShowUnsubModal} exit={exit} visible={modalVisible} setVisible={setModalVisible} agree={agree} message={message} setMessage={setMessage} action={action} />:<></>}
+       {!alert&&userData&&chosedTariff?<TariffModal chosedTariff={chosedTariff} userData={userData} showUnsubModal={showUnsubModal} setShowUnsubModal={setShowUnsubModal} exit={exit} visible={modalVisible} setVisible={setModalVisible} agree={agree} message={message} setMessage={setMessage} action={action} />:<></>}
        {!visible&&data.length==0?<>
        </>:<>
         {providerIcons && ( 
@@ -284,7 +288,7 @@ export default function PodpiskaMovie({navigation,route}) {
             ListHeaderComponent={
               <View style={styles.contentType}>
                 <Text allowFontScaling={false}style={styles.title}>Оформите подписку</Text>
-                {tariff?<Image  source={{uri: `http://play.tvcom.uz:8008/storage/` + tariff.imageinside}} style={styles.infoImage}/>:<></>}
+                {tariff?<Image  source={{uri: `http://play.tvcom.uz:8009/storage/` + tariff.imageinside}} style={styles.infoImage}/>:<></>}
                 {tariff?
                 <TouchableOpacity onPress={openModal}>
                     <View style={styles.btn}>

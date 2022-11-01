@@ -13,7 +13,7 @@ const ChannelItem = ({item,isLogin,navigation,index})=>{
           if (item.has_subscription == 1) {
             navigation.navigate('CurrentTv',item);
           } else {
-            navigation.push('PodpiskaTv');
+            navigation.push('PodpiskaTv',{channel_id:item.genre_id});
           }
         } else {
           navigation.navigate('Login');
@@ -28,7 +28,7 @@ const ChannelItem = ({item,isLogin,navigation,index})=>{
 
                     {item.img&&isLogin?<>
                       <Image
-                        source={{uri:item.img.includes('://')? item.img : `http://play.tvcom.uz:8008/storage/` + item.img}}      
+                        source={{uri:item.img.includes('://')? item.img : `http://play.tvcom.uz:8009/storage/` + item.img}}      
                         style={styles.SmallIcon}
                       />
                     </>:<></>}
@@ -46,7 +46,7 @@ const ChannelItem = ({item,isLogin,navigation,index})=>{
                     />:<></>}
                     {!item.program_preview_url?
                     <Image
-                        source={{uri:item.img.includes('://')? item.img : `http://play.tvcom.uz:8008/storage/` + item.img}}      
+                        source={{uri:item.img.includes('://')? item.img : `http://play.tvcom.uz:8009/storage/` + item.img}}      
                         style={styles.icon}
                     />:<></>}
                     { isLogin&&item.has_subscription != '1' ? (

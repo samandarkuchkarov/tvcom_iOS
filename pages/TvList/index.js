@@ -183,7 +183,7 @@ export default function TvList({navigation}) {
             if(item.has_subscription==1){
               navigation.navigate('CurrentTv',item)
             }else{
-              navigation.navigate('PodpiskaTv',item)
+              navigation.navigate('PodpiskaTv',{channel_id:item.id})
             }
           }else{
             navigation.navigate('Login')

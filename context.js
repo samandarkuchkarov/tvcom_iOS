@@ -90,7 +90,7 @@ export const ContextProvider = props => {
   const getJanr = () => {
     return axios({
       method: 'POST',
-      url: `http://play.tvcom.uz:8008/api/genres?pass=@j9@LKLKK29782LLL)`,
+      url: `http://play.tvcom.uz:8009/api/genres?pass=@j9@LKLKK29782LLL)`,
     })
       .then(e => {
         return e.data.message;
@@ -125,7 +125,7 @@ export const ContextProvider = props => {
       if(params.genre){
         return axios({
           method: 'POST',
-          url: `http://play.tvcom.uz:8008/api/genre/list`,
+          url: `http://play.tvcom.uz:8009/api/genre/list`,
           data: {
             token: token1,
             ...params,
@@ -190,7 +190,7 @@ export const ContextProvider = props => {
       if(params.genre){
         return axios({
           method: 'POST',
-          url: `http://play.tvcom.uz:8008/api/genre/list`,
+          url: `http://play.tvcom.uz:8009/api/genre/list`,
           data: {
             ...params,
             video_provider_id:isWorld?'1,2':params.video_provider_id,
@@ -559,7 +559,7 @@ export const ContextProvider = props => {
   const getChannelIcons = () => {
     return axios({
       method: 'POST',
-      url: `http://play.tvcom.uz:8008/api/icons?pass=@j9@LKLKK29782LLL)`,
+      url: `http://play.tvcom.uz:8009/api/icons?pass=@j9@LKLKK29782LLL)`,
     })
       .then(e => {
         return e.data.message;
@@ -778,7 +778,7 @@ export const ContextProvider = props => {
   const getTariffs = async () => {
     return axios({
       method: 'POST',
-      url: `http://play.tvcom.uz:8008/api/tariffs?pass=@j9@LKLKK29782LLL)`,
+      url: `http://play.tvcom.uz:8009/api/tariffs?pass=@j9@LKLKK29782LLL)`,
     })
       .then(e => {
         return e.data.message;
@@ -924,7 +924,7 @@ export const ContextProvider = props => {
   const getCinema = async () => {
     return axios({
       method: 'POST',
-      url: `http://play.tvcom.uz:8008/api/cinema?pass=@j9@LKLKK29782LLL)`,
+      url: `http://play.tvcom.uz:8009/api/cinema?pass=@j9@LKLKK29782LLL)`,
     })
       .then(e => {
         return e.data.message;
@@ -937,7 +937,7 @@ export const ContextProvider = props => {
   const getBanner = async () => {
     return axios({
       method: 'POST',
-      url: `http://play.tvcom.uz:8008/api/baner?pass=@j9@LKLKK29782LLL)`,
+      url: `http://play.tvcom.uz:8009/api/baner?pass=@j9@LKLKK29782LLL)`,
     })
       .then(e => {
         return e.data.message;
@@ -972,7 +972,7 @@ export const ContextProvider = props => {
   const getCustomMesseges = async () => {
     return axios({
       method: 'POST',
-      url: `http://play.tvcom.uz:8008/api/alerts?pass=@j9@LKLKK29782LLL)`,
+      url: `http://play.tvcom.uz:8009/api/alerts?pass=@j9@LKLKK29782LLL)`,
     })
       .then(e => {
         return e.data.message;

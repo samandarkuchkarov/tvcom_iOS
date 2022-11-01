@@ -1,32 +1,35 @@
-import React from 'react'
-import { ScrollView, View, Image, Text, Dimensions } from 'react-native'
+import React, { useContext, useState, useEffect } from 'react'
+import { ScrollView, View, Image, Text, Dimensions, TouchableOpacity, Linking } from 'react-native'
+import { Datas } from '../../context';
 import styles from './style'
 const { width } = Dimensions.get('window');
+import { getData, getQrPayme } from '../../Api';
 
 export default function PayMethods({navigation}) {
+    const money = 10000
+    const {isLogin} = useContext(Datas)
+    const [qrForPayme,setQrForPayMe] = useState('')
+    const [abonement,setAbonement] = useState('')
 
     const payMethods = [
-        require('../../images/pay1.png'),
-        require('../../images/pay2.png'),
-        require('../../images/pay3.png'),
-        require('../../images/pay4.png'),
-        require('../../images/pay5.png'),
-        require('../../images/pay6.png'),
-        require('../../images/pay7.png'),
-        require('../../images/pay8.png'),
-        require('../../images/pay9.png'),
-        require('../../images/pay10.png'),
-        require('../../images/pay11.png'),
-        require('../../images/pay12.png'),
-      ]
-    const splitToChunks = (array, parts) => {
-        let result = [];
-        for (let i = parts; i > 0; i--) {
-            result.push(array.splice(0, Math.ceil(array.length / i)));
+        {img:require('../../images/pay1.png'),qr:`https://www.apelsin.uz/open-service?serviceId=174&amount=${money*100}&id=${abonement}`,name:'apelsin'},
+        {img:require('../../images/pay2.png'),qr:'https://payme.uz/checkout/'+qrForPayme,name:'payme'},
+        {img:require('../../images/pay8.png'),qr:`https://my.click.uz/services/pay?amount=${money}&merchant_id=1&service_id=13105&transaction_param=${abonement}`},
+        {img:require('../../images/pay9.png')},
+    ]
+    useEffect(()=>{
+        const fetch = async() =>{
+        const abonement = await getData('abonement')
+        const response = await getQrPayme(abonement.number,money)
+        setAbonement(abonement.number)
+        setQrForPayMe(response.result.cheque._id)
         }
-        return result;
-    }
-    let index = Math.floor((width-10)/170)
+        if(isLogin){
+            fetch()
+        }
+        
+      },[isLogin])
+
   return (
     <ScrollView style={styles.wrapper}>
         <View style={styles.container}>
@@ -43,9 +46,11 @@ export default function PayMethods({navigation}) {
             <View style={styles.content}>
                 {payMethods?payMethods.map((item,index)=>{
                     return  <View style={{...styles.item,width:(width-20)/2}} key={index}>
-                                <View style={styles.wrapperItem}>
-                                    <Image key={index} style={styles.image} source={item} />
-                                </View>
+                                <TouchableOpacity onPress={()=>isLogin&&item.qr?Linking.openURL(item.qr):''}>
+                                    <View style={styles.wrapperItem}>
+                                        <Image key={index} style={styles.image} source={item.img} />
+                                    </View>
+                                </TouchableOpacity>
                             </View> 
                 }):
                 <></>}

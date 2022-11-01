@@ -29,7 +29,7 @@ const FilmCardPhone = ({item,providerIcons,isLogin,subscriptions,onPress}) => {
                 <View>
                     <View style={styles.imageWrapper}>
                         
-                        {icon? <Image style={styles.cinema_icon} source={{uri:`http://play.tvcom.uz:8008/storage/`+icon.img}}/>
+                        {icon? <Image style={styles.cinema_icon} source={{uri:`http://play.tvcom.uz:8009/storage/`+icon.img}}/>
                         :<></>}
 
                         <Image

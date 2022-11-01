@@ -328,19 +328,13 @@ const onRefresh = async()=>{
   }
   setRefreshing(false)
 }
-
   return (
-    <ScrollView
-    refreshControl={<RefreshControl
-      refreshing={refreshing}
-      onRefresh={onRefresh}
-    />}
-    style={{...globalStyles.container,zIndex:2}}>
-       {/* <QrPay/> */}
-     {tariffs.all&&userData&&debtStatus&&isLogin&&debtDel&&!modalVisible&&!message?<DebtModal debtDel={debtDel} setDebtDel={setDebtDel} tariffs={tariffs.all} userData={userData} monthly={monthly}/>:<></>}
-     {alert?<ModalToken  navigation={navigation}/>:<></>}
-     {!alert&&PromoMessage&&!modalVisible?<PromoModal PromoMessage={PromoMessage} setPromoMessage={setPromoMessage}/>:<></>}
-     {!alert&&!PromoMessage&&modalVisible?<TariffModal setShowUnsubModal={setShowUnsubModal} showUnsubModal={showUnsubModal} action={action} message={message} setMessage={setMessage} agree={agree} visible={modalVisible} setVisible={setModalVisible}/>:<></>}
+    <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>} style={{...globalStyles.container,zIndex:2}}>
+
+      {tariffs.all&&userData&&debtStatus&&isLogin&&debtDel&&!modalVisible&&!message?<DebtModal debtDel={debtDel} setDebtDel={setDebtDel} tariffs={tariffs.all} userData={userData} monthly={monthly}/>:<></>}
+      {alert?<ModalToken  navigation={navigation}/>:<></>}
+      {!alert&&PromoMessage&&!modalVisible?<PromoModal PromoMessage={PromoMessage} setPromoMessage={setPromoMessage}/>:<></>}
+      {!alert&&!PromoMessage&&modalVisible?<TariffModal chosedTariff={chosedTariff} userData={userData} setShowUnsubModal={setShowUnsubModal} showUnsubModal={showUnsubModal} action={action} message={message} setMessage={setMessage} agree={agree} visible={modalVisible} setVisible={setModalVisible}/>:<></>}
       {!loader?<>
       
       {isLogin==1&&userData?<>
@@ -365,6 +359,14 @@ const onRefresh = async()=>{
           <Text allowFontScaling={false}style={styles.balance}>Ежемесячный платеж:</Text>
           <Text allowFontScaling={false}style={styles.balance}>{monthly} сум</Text>
         </View>
+        <View style={{...styles.full,flexDirection:'column',alignItems:'flex-start'}}>
+          <View style={{...styles.full,paddingVertical:0,marginTop:0,marginBottom:5,paddingHorizontal:0,width:'100%'}}>
+          <Text allowFontScaling={false}style={styles.balanceDec}>Осталось активных дней:</Text>
+          <Text allowFontScaling={false}style={styles.balance}>{userData&&userData.activation_days_left} дней </Text>
+          </View>
+          <Text allowFontScaling={false}style={styles.balance}>{`${tariffs.all&&tariffs.all.filter(i=>i.is_assigned==1).map(i=>i.name)}`}</Text>
+        </View>
+        
       </View>
       </>:<></>}
       <TariffGroup

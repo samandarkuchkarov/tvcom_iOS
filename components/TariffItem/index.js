@@ -7,13 +7,13 @@ export default function TariffItem({openModal, isLogin, item, navigation}) {
         if(item.tariff_id!==7){
             navigation.navigate('PodpiskaMovie',{id:item.tariff_id})
         }else{
-            navigation.navigate('PodpiskaTv')
+            navigation.navigate('PodpiskaTv',{tariff_id:item.tariff_id})
         }
     }
   return (
     <View style={styles.wrapper}>
         <Image
-            source={{uri: 'http://play.tvcom.uz:8008/storage/' + item.img_big}}
+            source={{uri: 'http://play.tvcom.uz:8009/storage/' + item.img_big}}
             style={styles.back}
         />
         <View style={styles.info}>

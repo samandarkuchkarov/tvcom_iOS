@@ -111,7 +111,7 @@ export const logoutApi = async (token,phone) => {
 export const getPodborkaChannels = async()=>{
   return  axios({
     method: 'POST',
-    url: `http://play.tvcom.uz:8008/api/favchan?pass=@j9@LKLKK29782LLL)`,
+    url: `http://play.tvcom.uz:8009/api/favchan?pass=@j9@LKLKK29782LLL)`,
   }).then(e => {
       return e.data.message
     })
@@ -123,7 +123,7 @@ export const getPodborkaChannels = async()=>{
 export const getPodborka = async()=>{
   return axios({
     method: 'POST',
-    url: `http://play.tvcom.uz:8008/api/podborki?pass=@j9@LKLKK29782LLL)`,
+    url: `http://play.tvcom.uz:8009/api/podborki?pass=@j9@LKLKK29782LLL)`,
   }).then(e => {
       return e.data.data;
     })
@@ -174,7 +174,7 @@ export const getApiKey = (apiKey,setApiKey) =>{
   if(!apiKey){
     return axios({
       method:'POST',
-      url:'http://play.tvcom.uz:8008/api/moviekey?pass=@j9@LKLKK29782LLL)',
+      url:'http://play.tvcom.uz:8009/api/moviekey?pass=@j9@LKLKK29782LLL)',
     }).then((e)=>{
       let key = base64.decode(e.data.message); 
       setApiKey(key)
@@ -314,7 +314,7 @@ export const getSubscriptionList = async (setToken,setLogin,apiKey,token,phone) 
 export const getTime = async () => {
   return axios({
     method: 'POST',
-    url: `http://play.tvcom.uz:8008/api/somedata?pass=@j9@LKLKK29782LLL)`,
+    url: `http://play.tvcom.uz:8009/api/somedata?pass=@j9@LKLKK29782LLL)`,
   })
     .then(e => {
       return Number(e.data.message.timestamp);
@@ -326,7 +326,7 @@ export const getTime = async () => {
 export const getFullChannels = async (isWorld) => {
   return axios({
     method: 'POST',
-    url: `http://play.tvcom.uz:8008/api/tvlist?pass=@j9@LKLKK29782LLL)`,
+    url: `http://play.tvcom.uz:8009/api/tvlist?pass=@j9@LKLKK29782LLL)`,
   })
     .then(e => {
       if(e.data.data){
@@ -374,7 +374,7 @@ export const setVideoPosition = async ({content_type = "video",content_id,positi
 export const getAnswers = async () => {
   return axios({
     method: 'POST',
-    url: `http://play.tvcom.uz:8008/api/answers?pass=@j9@LKLKK29782LLL)`,
+    url: `http://play.tvcom.uz:8009/api/answers?pass=@j9@LKLKK29782LLL)`,
   })
     .then(e => {
      
@@ -389,7 +389,7 @@ export const checkWorld = async () => {
   //console.log(ip)
   return axios({
     method: 'POST',
-    url: `http://play.tvcom.uz:8008/api/shpion?pass=@j9@LKLKK29782LLL)`,
+    url: `http://play.tvcom.uz:8009/api/shpion?pass=@j9@LKLKK29782LLL)`,
    // data:ip
   })
     .then(e => {
@@ -400,3 +400,48 @@ export const checkWorld = async () => {
     });
 }
 
+export const getQrPayme = async (abonement,amount) => {
+  return axios({
+    method: 'POST',
+    url: `https://payme.uz/api/cheque.create`,
+    data:{
+      "method":"cheque.create",
+      "params":{"account":{"abonement":abonement},
+      "amount":amount?amount*100:1500000,
+      "merchant_id":"5a992f7044e6a65eb99f0c8a"}}
+    
+  })
+    .then(e => {
+      return e.data
+    })
+    .catch(e => {
+      console.warn(e, 'checkWorld');
+    });
+}
+export const getChannelDetail = async ({apiKey, token,cid}) => {
+  //const device_uid = await DeviceInfo.getUniqueId()
+  const device_uid = await Network.getIpAddressAsync()
+
+  return axios({
+    method:'GET',
+    url:'https://mw.tvcom.uz/tvmiddleware/api/channel/detail/',
+    params:{
+      api_key:apiKey,
+      client_id:1,
+      authkey:token,
+      //device_uid,
+      cid
+
+    }
+  }).then(e=>{
+    console.log(e.data)
+    if(typeof e.data ==='string'){
+      let data = parse(e.data) 
+      return data.rss
+    }
+    return e.data
+  }).catch(e=>{
+    console.warn(e, 'getChannelDetail' )
+  })
+
+}

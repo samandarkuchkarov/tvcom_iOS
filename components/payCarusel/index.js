@@ -1,28 +1,17 @@
 import React from 'react'
-import { ScrollView, Image, StyleSheet, View } from 'react-native'
+import { ScrollView, Image, StyleSheet, View, TouchableOpacity, Linking } from 'react-native'
 
-export default function payCarusel() {
-    const payMethods = [
-        require('../../images/pay1.png'),
-        require('../../images/pay2.png'),
-        require('../../images/pay3.png'),
-        require('../../images/pay4.png'),
-        require('../../images/pay5.png'),
-        require('../../images/pay6.png'),
-        require('../../images/pay7.png'),
-        require('../../images/pay8.png'),
-        require('../../images/pay9.png'),
-        require('../../images/pay10.png'),
-        require('../../images/pay11.png'),
-        require('../../images/pay12.png'),
-      ]
+export default function payCarusel({payMethods}) {
   return (
-    <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
+    <ScrollView showsHorizontalScrollIndicator={false} style={{marginTop:10}} horizontal={true}>
         {payMethods.map((item,index)=>{
             return(  
-            <View style={styles.imageWrapper}>
-                <Image key={index} style={styles.image} source={item} />
-            </View>)
+            <TouchableOpacity key={index} onPress={()=>item.qr?Linking.openURL(item.qr):''}>
+                <View style={styles.imageWrapper}>
+                    <Image  style={styles.image} source={item.img} />
+                </View>
+            </TouchableOpacity>
+            )
         })}
     </ScrollView>
   )

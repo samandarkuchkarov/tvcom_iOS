@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ScrollView, Text, View, Dimensions, TouchableOpacity, Image } from 'react-native'
 import styles from './style'
 import { getAnswers } from '../../Api'
-// import WebView from 'react-native-webview'
+import WebView from 'react-native-webview'
 const { width, height } = Dimensions.get('window');
 export default function Answers() {
 
@@ -46,9 +46,34 @@ export default function Answers() {
                     </TouchableOpacity>
 
                   </View>
-                 
                  {selected===item.id?<View style={{zIndex:1}}>
-                 <Text allowFontScaling={false}style={styles.questionText}>{item.answer}</Text>
+                  <WebView
+                    style={styles.webView}
+                    automaticallyAdjustContentInsets={true}
+                    originWhitelist={['*']}
+                    source={{ html:`
+                    ${item.answer}
+                    <style>
+                    body{
+                      background-color:#010101;
+                      display:flex;
+                      flex-direction:column;
+                      align-items: center;
+                    }
+                    img{
+                      width:50vw !important;
+                      height:50vw !important;
+                    }
+                    p,li{
+                      font-size:50px;
+                      width:100%;
+                      color:#fff;
+                      margin:0px;
+          
+                    }
+                    </style>
+                    ` }}
+                  />
                   </View>:<></>}
                 </View>
       })}
