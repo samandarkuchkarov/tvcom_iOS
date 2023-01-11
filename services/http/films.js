@@ -5,7 +5,7 @@ import { parseXML } from "../utils/parser";
 
 export const getFilms = async (limit = 10, page = 1, filter = {}) => {
   const url = filter.genre
-    ? "http://play.tvcom.uz:8008/apis/genre/list"
+    ? "http://play.tvcom.uz:8008/api/genre/list"
     : localStorage.getItem("token")
     ? "/tvmiddleware/api/video/list/"
     : "/tvmiddleware/api/noauth/video/list/";
@@ -20,7 +20,7 @@ export const getFilms = async (limit = 10, page = 1, filter = {}) => {
       })
     : await axios({
         method: "POST",
-        url: `http://play.tvcom.uz:8008/apis/genre/list`,
+        url: `http://play.tvcom.uz:8008/api/genre/list`,
         data: {
           ...filter,
           token: localStorage.getItem("token"),
@@ -95,7 +95,7 @@ export const getFilmByVfid = async (id) => {
 
 export const getCinema = async () => {
   const { data } = await axios.post(
-    "http://play.tvcom.uz:8008/apis/cinema?pass=@j9@LKLKK29782LLL)"
+    "http://play.tvcom.uz:8008/api/cinema?pass=@j9@LKLKK29782LLL)"
   );
   return data;
 };

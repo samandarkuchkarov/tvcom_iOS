@@ -111,7 +111,7 @@ export const logoutApi = async (token,phone) => {
 export const getPodborkaChannels = async()=>{
   return  axios({
     method: 'POST',
-    url: `http://play.tvcom.uz:8008/apis/favchan?pass=@j9@LKLKK29782LLL)`,
+    url: `http://play.tvcom.uz:8008/api/favchan?pass=@j9@LKLKK29782LLL)`,
   }).then(e => {
       return e.data.message
     })
@@ -123,7 +123,7 @@ export const getPodborkaChannels = async()=>{
 export const getPodborka = async()=>{
   return axios({
     method: 'POST',
-    url: `http://play.tvcom.uz:8008/apis/podborki?pass=@j9@LKLKK29782LLL)`,
+    url: `http://play.tvcom.uz:8008/api/podborki?pass=@j9@LKLKK29782LLL)`,
   }).then(e => {
       return e.data.data;
     })
@@ -176,7 +176,7 @@ export const getApiKey = (apiKey,setApiKey) =>{
   // if(!apiKey){
     // return axios({
     //   method:'POST',
-    //   url:'http://play.tvcom.uz:8008/apis/moviekey?pass=@j9@LKLKK29782LLL)',
+    //   url:'http://play.tvcom.uz:8008/api/moviekey?pass=@j9@LKLKK29782LLL)',
     // }).then((e)=>{
     //   let key = base64.decode(e.data.message); 
     //   setApiKey(key)
@@ -319,7 +319,7 @@ export const getTime = async () => {
 export const getFullChannels = async (isWorld) => {
   return axios({
     method: 'POST',
-    url: `http://play.tvcom.uz:8008/apis/tvlist?pass=@j9@LKLKK29782LLL)`,
+    url: `http://play.tvcom.uz:8008/api/tvlist?pass=@j9@LKLKK29782LLL)`,
   })
     .then(e => {
       if(e.data.data){
@@ -367,7 +367,7 @@ export const setVideoPosition = async ({content_type = "video",content_id,positi
 export const getAnswers = async () => {
   return axios({
     method: 'POST',
-    url: `http://play.tvcom.uz:8008/apis/answers?pass=@j9@LKLKK29782LLL)`,
+    url: `http://play.tvcom.uz:8008/api/answers?pass=@j9@LKLKK29782LLL)`,
   })
     .then(e => {
      
@@ -382,7 +382,7 @@ export const checkWorld = async () => {
   //console.log(ip)
   return axios({
     method: 'POST',
-    url: `http://play.tvcom.uz:8008/apis/shpion?pass=@j9@LKLKK29782LLL)`,
+    url: `http://play.tvcom.uz:8008/api/shpion?pass=@j9@LKLKK29782LLL)`,
    // data:ip
   })
     .then(e => {
