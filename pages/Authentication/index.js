@@ -108,7 +108,6 @@ export default function Authentication({navigation}) {
   
   }, [abonement,password,phone])
   
-
   return (
     <ScrollView
       style={{

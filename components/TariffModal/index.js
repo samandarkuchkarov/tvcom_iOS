@@ -10,7 +10,6 @@ export default function TariffModal({visible,setVisible,agree,message,setMessage
         setMessage('');
         setVisible(false);
     }
-    console.log(chosedTariff)
     const [qrForPayme,setQrForPayMe] = useState('')
     const money = Math.ceil(chosedTariff.realPrice-userData.balance)
     const payMethods = [

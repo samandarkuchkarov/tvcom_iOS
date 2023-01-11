@@ -146,7 +146,6 @@ export default function Movie({navigation}) {
         setSelectedJanrId={setSelectedJanrId}
         data={janres}
       />
-      {providerIcons && ( 
         <FlatList
           data={data}
           columnWrapperStyle={{width:width-10,marginLeft:5}}
@@ -172,7 +171,6 @@ export default function Movie({navigation}) {
             </View>
           )}
         />
-      )}
     </View>
   );
 }

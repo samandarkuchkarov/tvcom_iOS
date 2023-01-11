@@ -70,7 +70,7 @@ const RecomendedCarusel = ({ navigation, providerIcons, subscriptions, actors, m
     return (
 
         <View style={styles.wrapper}>
-                {smilarContent && smilarContent.length && providerIcons  ? 
+                {smilarContent && smilarContent.length  ? 
                 <FilmCaruselPhone
                     isLogin={isLogin}
                     push

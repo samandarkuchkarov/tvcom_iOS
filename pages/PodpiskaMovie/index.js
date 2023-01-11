@@ -280,7 +280,6 @@ export default function PodpiskaMovie({navigation,route}) {
        {!alert&&userData&&chosedTariff?<TariffModal chosedTariff={chosedTariff} userData={userData} showUnsubModal={showUnsubModal} setShowUnsubModal={setShowUnsubModal} exit={exit} visible={modalVisible} setVisible={setModalVisible} agree={agree} message={message} setMessage={setMessage} action={action} />:<></>}
        {!visible&&data.length==0?<>
        </>:<>
-        {providerIcons && ( 
           <FlatList
             data={data}
             columnWrapperStyle={{width:width-10,marginLeft:5}}
@@ -288,7 +287,7 @@ export default function PodpiskaMovie({navigation,route}) {
             ListHeaderComponent={
               <View style={styles.contentType}>
                 <Text allowFontScaling={false}style={styles.title}>Оформите подписку</Text>
-                {tariff?<Image  source={{uri: `http://play.tvcom.uz:8009/storage/` + tariff.imageinside}} style={styles.infoImage}/>:<></>}
+                {tariff?<Image  source={{uri: `http://play.tvcom.uz:8008/storage/` + tariff.imageinside}} style={styles.infoImage}/>:<></>}
                 {tariff?
                 <TouchableOpacity onPress={openModal}>
                     <View style={styles.btn}>
@@ -321,7 +320,6 @@ export default function PodpiskaMovie({navigation,route}) {
               </View>:<></>
             )}
           />
-        )}
        
        </>}
 

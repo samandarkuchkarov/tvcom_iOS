@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
         position:'absolute',
         zIndex:2,
         right:5,
-        top:5
+        top:5,
+        resizeMode:'contain'
     },
     black:{
         backgroundColor: 'rgba(7,5,14,.8)',

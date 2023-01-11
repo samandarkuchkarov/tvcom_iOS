@@ -135,7 +135,6 @@ export default function Amedia({navigation,route}) {
             </View>
         </View>
        </>:<>
-        {providerIcons && ( 
           <FlatList
             data={data}
             columnWrapperStyle={{width:width-10,marginLeft:5}}
@@ -214,7 +213,6 @@ export default function Amedia({navigation,route}) {
               </View>:<></>
             )}
           />
-        )}
        
        </>}
 

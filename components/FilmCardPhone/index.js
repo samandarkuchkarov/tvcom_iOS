@@ -7,7 +7,7 @@ const FilmCardPhone = ({item,providerIcons,isLogin,subscriptions,onPress}) => {
    
     let aviable = true
     const icon =providerIcons&&providerIcons.filter(item2=>item2.provider_id == item.video_provider_id&&item.video_provider_id!=3)[0]
-    let movieTariffId =  providerIcons.filter(item2=>item2.provider_id == item.video_provider_id&&item2.video_provider_id!=3)[0]
+    let movieTariffId = providerIcons&& providerIcons.filter(item2=>item2.provider_id == item.video_provider_id&&item2.video_provider_id!=3)[0]
     if(movieTariffId){
         movieTariffId = movieTariffId.provider
     }
@@ -29,7 +29,7 @@ const FilmCardPhone = ({item,providerIcons,isLogin,subscriptions,onPress}) => {
                 <View>
                     <View style={styles.imageWrapper}>
                         
-                        {icon? <Image style={styles.cinema_icon} source={{uri:`http://play.tvcom.uz:8009/storage/`+icon.img}}/>
+                        {icon? <Image style={styles.cinema_icon} source={{uri:`http://play.tvcom.uz:8008/storage/`+icon.img}}/>
                         :<></>}
 
                         <Image

@@ -137,7 +137,7 @@ export default function Search({navigation}) {
           />
 
           <View style={{marginTop:0,marginBottom:100}}>
-            {providerIcons&&movieContent&&movieContent.length!=0?
+            {movieContent&&movieContent.length!=0?
             <FlatList
               data={movieContent}
               renderItem={renderItem}

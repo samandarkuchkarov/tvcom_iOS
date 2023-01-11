@@ -54,18 +54,18 @@ export default function PlayerChannel({channel,programData,setProgramData,allPro
     const getChannelList = async() => {
         let data = await getChannel(isLogin,token,apiKey,true,isWorld);
         let icons = await getFullChannels(isWorld)
-        if(data&&icons){
+        if(data){
           for(let i = 0;i<data.length;i++){
-            icons = icons.filter(item=>item.id!=data[i].id)
+            icons = icons&&icons.filter(item=>item.id!=data[i].id)
           }
-          icons = icons.map(item=>{
+          icons =icons&&icons.map(item=>{
             let New = {...item}
             New.has_subscription = 0
             return New
           })
           
           if (data && data.length ) {
-            data = [...data,...icons]
+            data = icons?[...data,...icons]:data  
             data = data.sort((a, b) => Number(a.channel_sort) - Number(b.channel_sort));         
             setChannelList({
               all: data,
@@ -89,7 +89,7 @@ export default function PlayerChannel({channel,programData,setProgramData,allPro
           if(current.program_id){
             let time = await getTime() 
             const data = await getTimeShift(current.id,current.program_begin_time,true);
-            
+            console.log(data) 
             if(render&&data.uri){
               setTimer(time);
               setUri(data.uri);

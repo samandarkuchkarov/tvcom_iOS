@@ -122,16 +122,16 @@ export default function PodpiskaTv({navigation,route}) {
         let data = await getChannelIcons(isWorld);
         let freeChannels = [4,1,137,42,67,51,50,49,53,60,56,58,54,62,84,52,15,55]
         for(let i = 0;i<freeChannels.length;i++){
-            data = data.filter(item=>item.genre_id!=freeChannels[i])
+            data = data&&data.filter(item=>item.genre_id!=freeChannels[i])
         }
-        data = data.map(i=>{
+        data = data&&data.map(i=>{
           let New = {...i}
           New.icon = i.img
           let id = i.tariff_id?i.tariff_id:7
           New.tariff_id = id
           return New
         })
-        data = data.filter(i=>i.tariff_id == tariff.id)
+        data =data&&data.filter(i=>i.tariff_id == tariff.id)
         setTvlist({
             all:data,
             filtered:data
@@ -232,7 +232,7 @@ export default function PodpiskaTv({navigation,route}) {
                           <Image 
                             style={styles.icon}
                             source={{ 
-                              uri:'http://play.tvcom.uz:8009/storage/'+item.icon
+                              uri:'http://play.tvcom.uz:8008/storage/'+item.icon
                             }}/>
                       </View>
                       <View style={styles.textBlock}>
@@ -283,7 +283,7 @@ export default function PodpiskaTv({navigation,route}) {
                     ListHeaderComponent={
                     <View style={styles.header}>
                       <Text allowFontScaling={false}style={styles.title}>Оформите подписку</Text>
-                      {tariff?<Image  source={{uri:`http://play.tvcom.uz:8009/storage/` + tariff.imageinside}} style={styles.infoImage}/>:<></>}
+                      {tariff?<Image  source={{uri:`http://play.tvcom.uz:8008/storage/` + tariff.imageinside}} style={styles.infoImage}/>:<></>}
                       {tariff?<TouchableOpacity onPress={openModal}>
                           <View style={styles.btn}>
                               {isLogin?<Text allowFontScaling={false} style={{...styles.tariffBtnText}}>{tariff.is_assigned?'Отменить':'Купить'}</Text>:<></>}

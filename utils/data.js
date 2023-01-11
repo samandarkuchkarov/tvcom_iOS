@@ -42,7 +42,7 @@ export const sortList = [
 ];
 
 export const getStorageUrl = (url) => {
-  return "http://play.tvcom.uz:8009/storage/" + url;
+  return "http://play.tvcom.uz:8008/storage/" + url;
 };
 
 export const checkSubscribesVideo = (data, cinema, subTariffs) => {

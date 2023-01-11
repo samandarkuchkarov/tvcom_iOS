@@ -13,7 +13,7 @@ export default function TariffItem({openModal, isLogin, item, navigation}) {
   return (
     <View style={styles.wrapper}>
         <Image
-            source={{uri: 'http://play.tvcom.uz:8009/storage/' + item.img_big}}
+            source={{uri: 'http://play.tvcom.uz:8008/storage/' + item.img_big}}
             style={styles.back}
         />
         <View style={styles.info}>

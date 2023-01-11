@@ -11,7 +11,7 @@ export default function JanrFilterCarusel({data,selectedJanrId, setSelectedJanrI
                     <View style={{...styles.card,backgroundColor:focus?'#E41A4B':'#1c1c1c'}}>
                         <Image 
                             style={styles.image}
-                            source={focus ? {uri:'http://play.tvcom.uz:8009/storage/' +item.img2}: {uri:'http://play.tvcom.uz:8009/storage/' +item.img}
+                            source={focus ? {uri:'http://play.tvcom.uz:8008/storage/' +item.img2}: {uri:'http://play.tvcom.uz:8008/storage/' +item.img}
                         }/>
                         <Text allowFontScaling={false}style={{...styles.cardText}}>
                             {item.name}

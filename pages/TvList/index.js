@@ -61,11 +61,11 @@ export default function TvList({navigation}) {
         }
   
         let arr = [];
-        let icons = [...data]
+        let icons = data&&[...data]
         
         if (allData && render) {
           for (let i = 0; i < allData.length; i++) {
-            let currentData = data.filter( item => item.id == allData[i].id)[0];
+            let currentData = data&&data.filter( item => item.id == allData[i].id)[0];
             
             if(!currentData){
               currentData = {
@@ -83,15 +83,15 @@ export default function TvList({navigation}) {
               New.name = currentData.name;
               New.icon = currentData.icon;
               arr.push(New);
-              icons = icons.filter(item=>item.id != New.id)
+              icons = icons&&icons.filter(item=>item.id != New.id)
             }
           }
-          icons = icons.map(item=>{
+          icons = icons&&icons.map(item=>{
             let New = {...item}
             New.has_subscription = 0
             return New
           })
-          arr = [...arr,...icons]
+          arr = icons?[...arr,...icons]:arr
           arr = arr.sort((a, b) => Number(a.channel_sort) - Number(b.channel_sort));
           setTvlist({
             all: arr,
@@ -99,7 +99,7 @@ export default function TvList({navigation}) {
           });
   
         } else if (!allData && render) {
-          data = data.map(i=>{
+          data = data&&data.map(i=>{
             let New = {...i}
             New.has_subscription = 0
             return New
@@ -280,11 +280,9 @@ export default function TvList({navigation}) {
       };
       fetch();
     }, [navigation]);
-    
     return (
         <View style={globalStyles.container}>
           {alert?<ModalToken navigation={navigation}/>:<></>}
-          {janres&&janres.length&&tvlist.filtered.length?<>
             {janres&&janres.length?<TvJanrCarusel isLogin={isLogin} data={janres} setSelectedJanrId={setSelectedJanrId} selectedJanrId={selectedJanrId}/>:<></>}
             {tvlist.filtered?
               <Animated.FlatList
@@ -292,12 +290,7 @@ export default function TvList({navigation}) {
                   renderItem={renderItem}
                   data={tvlist.filtered}
                   keyExtractor={item => item.id + ' ' + item.is_favorited + ' ' + item.has_subscription}
-              />:<></>}
-          </>:<>
-          <View style={styles.center}>
-              <ActivityIndicator size='large' color='#fff' />
-          </View>
-          </>}
+              />:<></>}          
         </View>
     )
 }

@@ -16,7 +16,7 @@ export const getChannels = async () => {
 export const getChannelIcons = async isLogged => {
   const noauthChannelsIcon = await axios({
     method: 'POST',
-    url: `http://play.tvcom.uz:8009/api/icons?pass=@j9@LKLKK29782LLL)`,
+    url: `http://play.tvcom.uz:8008/apis/icons?pass=@j9@LKLKK29782LLL)`,
   });
 
   let result = noauthChannelsIcon.data.message;
@@ -42,7 +42,7 @@ export const getChannelIcons = async isLogged => {
 export const getFavChannels = async isLogged => {
   const {data} = await axios({
     method: 'POST',
-    url: 'http://play.tvcom.uz:8009/api/favchan?pass=@j9@LKLKK29782LLL)',
+    url: 'http://play.tvcom.uz:8008/apis/favchan?pass=@j9@LKLKK29782LLL)',
   });
 
   const iconsData = await getChannelIcons(isLogged);

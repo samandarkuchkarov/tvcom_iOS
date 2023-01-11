@@ -150,14 +150,14 @@ React.useEffect(() => {
       const userData = await getUserInfo();
       const abonement = await getData('abonement');
       let tariffs = await getTariffs();
-      let base = tariffs.filter(item => item.tariff_id == 51)[0];
-      tariffs = tariffs.filter(i => i.tariff_id !== 51);
+      let base = tariffs&&tariffs.filter(item => item.tariff_id == 51)[0];
+      tariffs = tariffs&&tariffs.filter(i => i.tariff_id !== 51);
       if (userData && render) {
         userData.abonement = abonement.number;
         setUserData(userData);
         setMonthly(userData.monthly_payment)
         let aviableTariffs = userData.tariffs.item;
-        tariffs = tariffs.map(item => {
+        tariffs = tariffs&&tariffs.map(item => {
           let New = {...item}
           let currentTariff = aviableTariffs.filter(
             item2 => item2.id == item.tariff_id,
@@ -170,9 +170,9 @@ React.useEffect(() => {
         let result = []
         sort.forEach(element => {
           result.push(tariffs.filter(item=>item.tariff_id==element)[0])
-          tariffs = tariffs.filter(item=>item.tariff_id!=element)
+          tariffs = tariffs&&tariffs.filter(item=>item.tariff_id!=element)
         });
-        result = [...result,...tariffs]
+        result = tariffs?[...result,...tariffs]:result
         setTariffs({
           base: base,
           all: result,
@@ -183,15 +183,17 @@ React.useEffect(() => {
       }
     } else {
       let tariffs = await getTariffs();
-      let base = tariffs.filter(item => item.tariff_id == 51)[0];
-      tariffs = tariffs.filter(i => i.tariff_id !== 51);
+      let base = tariffs&&tariffs.filter(item => item.tariff_id == 51)[0];
+      tariffs = tariffs&&tariffs.filter(i => i.tariff_id !== 51);
       const sort = [32,35,7,23,24]
       let result = []
       sort.forEach(element => {
-        result.push(tariffs.filter(item=>item.tariff_id==element)[0])
-        tariffs = tariffs.filter(item=>item.tariff_id!=element)
+        if(tariffs){
+          result.push(tariffs.filter(item=>item.tariff_id==element)[0])
+        }    
+        tariffs = tariffs&&tariffs.filter(item=>item.tariff_id!=element)
       });
-      result = [...result,...tariffs]
+      result = tariffs?[...result,...tariffs]:result
       setTariffs({
         base: base,
         all: result,

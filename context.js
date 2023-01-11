@@ -47,7 +47,7 @@ export const ContextProvider = props => {
       params: {
         mobile_phone_number: phone,
         client_id: 1,
-        api_key: apiKey,
+        api_key: '56JNSqNT',
         device:"ios",
         comment:isPhone?'Registration from android device new app':'Registration from android TV 2.0.2',
         send_sms:1,
@@ -69,28 +69,10 @@ export const ContextProvider = props => {
       });
   };
   
-  const registrationAbon = async (phone, login) => {
-    return axios({
-      method: 'POST',
-      url: `http://play.tvcom.uz/api/register/abon`,
-      data: {
-        phone,
-        login,
-        
-
-      },
-    })
-      .then(async e => {
-        return e;
-      })
-      .catch(e => {
-        console.log(e, 'registrationAbon');
-      });
-  };
   const getJanr = () => {
     return axios({
       method: 'POST',
-      url: `http://play.tvcom.uz:8009/api/genres?pass=@j9@LKLKK29782LLL)`,
+      url: `http://play.tvcom.uz:8008/apis/genres?pass=@j9@LKLKK29782LLL)`,
     })
       .then(e => {
         return e.data.message;
@@ -116,16 +98,12 @@ export const ContextProvider = props => {
       token1 = token
     }
 
-    let api_key = apiKey
-    if(!api_key){
-      api_key = await getApiKey(apiKey,setApiKey)
-    } 
-    
+    let api_key = "56JNSqNT"
     if (isLogin !== 0 && token1) {
       if(params.genre){
         return axios({
           method: 'POST',
-          url: `http://play.tvcom.uz:8009/api/genre/list`,
+          url: `http://play.tvcom.uz:8008/apis/genre/list`,
           data: {
             token: token1,
             ...params,
@@ -151,16 +129,17 @@ export const ContextProvider = props => {
       }else{
         
         delete params.genre
+        console.log(params,1111111)
         return axios({
           method: 'GET',
           url: `https://mw.tvcom.uz/tvmiddleware/api/video/list/?client_id=1`,
           params: {
             authkey: token1,
-            api_key,
+            api_key:'56JNSqNT',
             device:'android_stb',
             device_uid,
             ...params,
-            video_provider_id:isWorld?'1,2':params.video_provider_id,
+            // video_provider_id:isWorld?'1,2':params.video_provider_id?params.video_provider_id:null,
           },
         }).then(e => {
             if (typeof e.data == 'string') {
@@ -180,6 +159,7 @@ export const ContextProvider = props => {
             if (!e.data.videos) {
               return [];
             }
+            console.log(e.data.videos.map(i=>i.video_provider_id) )
             return e.data.videos;
           })
           .catch(e => {
@@ -190,7 +170,7 @@ export const ContextProvider = props => {
       if(params.genre){
         return axios({
           method: 'POST',
-          url: `http://play.tvcom.uz:8009/api/genre/list`,
+          url: `http://play.tvcom.uz:8008/apis/genre/list`,
           data: {
             ...params,
             video_provider_id:isWorld?'1,2':params.video_provider_id,
@@ -216,7 +196,7 @@ export const ContextProvider = props => {
           method: 'GET',
           url: `https://mw.tvcom.uz/tvmiddleware/api/noauth/video/list/?client_id=1`,
           params: {
-            api_key,
+            api_key:'56JNSqNT',
             device:'android_stb',
             device_uid,
             ...params,
@@ -269,7 +249,7 @@ export const ContextProvider = props => {
           params: {
             authkey: token1,
             ...params,
-            api_key:apiKey,
+            api_key:'56JNSqNT',
             device:'android_stb',
             device_uid,
             video_provider_id:isWorld?'1,2':null,
@@ -358,7 +338,7 @@ export const ContextProvider = props => {
           vid: Number(id),
           device: 'android_stb',
           client_id: 1,
-          api_key: apiKey,
+          api_key: '56JNSqNT',
           device_uid
         },
       })
@@ -387,7 +367,7 @@ export const ContextProvider = props => {
         redirect:0,
         device:"ios",
         client_id:1,
-        api_key:apiKey,
+        api_key:'56JNSqNT',
         device_uid
       },
     })
@@ -413,7 +393,7 @@ export const ContextProvider = props => {
           search: text,
           limit: 20,
           authkey:token,
-          api_key:apiKey,
+          api_key:'56JNSqNT',
           device:'android_stb',
           device_uid,
           video_provider_id:isWorld?'1,2':null
@@ -449,7 +429,7 @@ export const ContextProvider = props => {
         params: {
           search: text,
           limit: 20,
-          api_key:apiKey,
+          api_key:'56JNSqNT',
           device:'android_stb',
           device_uid,
           video_provider_id:isWorld?'1,2':null,
@@ -559,7 +539,7 @@ export const ContextProvider = props => {
   const getChannelIcons = () => {
     return axios({
       method: 'POST',
-      url: `http://play.tvcom.uz:8009/api/icons?pass=@j9@LKLKK29782LLL)`,
+      url: `http://play.tvcom.uz:8008/apis/icons?pass=@j9@LKLKK29782LLL)`,
     })
       .then(e => {
         return e.data.message;
@@ -630,17 +610,55 @@ export const ContextProvider = props => {
   };
 
   const getProgramListByDay = (cid,phone) => {
+    const time_from = new Date()
+    time_from.setDate(time_from.getDate() - 6);
+    const time_to	= new Date()
+    time_to.setUTCHours(23,59,59,999);
     if (isLogin == 1) {
       return axios({
-        method: 'POST',
-        url: `http://play.tvcom.uz/api/auth/channel/epg`,
-        data: {
-          token: token,
+        method: 'GET',
+        url: `https://mw.tvcom.uz/tvmiddleware/api/program/list/`,
+        params: {
+          authkey: token,
           cid,
+          client_id:1,
+          api_key:'56JNSqNT',
+          device:"android_stb",
+          time_to:(time_to.valueOf()/1000).toFixed(0),
+          time_from	:(time_from.valueOf()/1000).toFixed(0)
         },
       })
         .then(e => {
-          return e.data;
+          let data
+          if(typeof e.data === 'string'){
+            data = parse(e.data).rss
+          }else{
+            data = e.data
+          }
+          const allData = data.programs.item?data.programs.item:data.programs
+          let dates = []
+          let currentDate = ''
+          allData.forEach((element,index) => {
+              let D = new Date(Number(element.begin_time)*1000)
+              let month = (D.getUTCMonth()+1)>9?(D.getUTCMonth()+1):'0'+(D.getUTCMonth()+1)
+              let day =D.getUTCDate()>9?D.getUTCDate():'0'+D.getUTCDate()
+              let dateItem = month+'.'+day
+              if(currentDate !== dateItem){
+                  currentDate = dateItem
+                  dates.push(currentDate)
+              }
+          });
+          let result = {}
+          dates.forEach((element,index) => {
+              result[element] = allData.filter(program=>{
+                  let D = new Date(Number(program.begin_time)*1000) 
+                  let month = (D.getUTCMonth()+1)>9?(D.getUTCMonth()+1):'0'+(D.getUTCMonth()+1)
+                  let day =D.getUTCDate()>9?D.getUTCDate():'0'+D.getUTCDate()
+                  let dateItem = month+'.'+day
+                  return dateItem===element
+              })
+          });
+          return {data:result}
         })
         .catch(e => {
           console.log(e, 'getProgramListByDay',cid);
@@ -656,7 +674,7 @@ export const ContextProvider = props => {
         params: {
           authkey: token,
           client_id:1,
-          api_key:apiKey,
+          api_key:'56JNSqNT',
           device:"android_stb",
           device_uid
         },
@@ -778,7 +796,7 @@ export const ContextProvider = props => {
   const getTariffs = async () => {
     return axios({
       method: 'POST',
-      url: `http://play.tvcom.uz:8009/api/tariffs?pass=@j9@LKLKK29782LLL)`,
+      url: `http://play.tvcom.uz:8008/apis/tariffs?pass=@j9@LKLKK29782LLL)`,
     })
       .then(e => {
         return e.data.message;
@@ -797,7 +815,7 @@ export const ContextProvider = props => {
         authkey:token,
         code: promo,
         client_id:1,
-        api_key:apiKey,
+        api_key:'56JNSqNT',
         device:"ios",
         device_uid
       },
@@ -825,7 +843,7 @@ export const ContextProvider = props => {
         authkey:token,
         tariff_id,
         client_id:1,
-        api_key:apiKey,
+        api_key:'56JNSqNT',
         device:"ios",
         device_uid
       },
@@ -851,7 +869,7 @@ export const ContextProvider = props => {
         authkey:token,
         tariff_id,
         client_id:1,
-        api_key:apiKey,
+        api_key:'56JNSqNT',
         device:"ios",
         device_uid
       },
@@ -877,7 +895,7 @@ export const ContextProvider = props => {
         authkey:token,
         tariff_id,
         client_id:1,
-        api_key:apiKey,
+        api_key:'56JNSqNT',
         device:"ios",
         device_uid
       },
@@ -902,7 +920,7 @@ export const ContextProvider = props => {
       params: {
         authkey: token,
         client_id:1,
-        api_key:apiKey,
+        api_key:'56JNSqNT',
         device:"ios",
         device_uid
       
@@ -924,7 +942,7 @@ export const ContextProvider = props => {
   const getCinema = async () => {
     return axios({
       method: 'POST',
-      url: `http://play.tvcom.uz:8009/api/cinema?pass=@j9@LKLKK29782LLL)`,
+      url: `http://play.tvcom.uz:8008/apis/cinema?pass=@j9@LKLKK29782LLL)`,
     })
       .then(e => {
         return e.data.message;
@@ -937,7 +955,7 @@ export const ContextProvider = props => {
   const getBanner = async () => {
     return axios({
       method: 'POST',
-      url: `http://play.tvcom.uz:8009/api/baner?pass=@j9@LKLKK29782LLL)`,
+      url: `http://play.tvcom.uz:8008/apis/baner?pass=@j9@LKLKK29782LLL)`,
     })
       .then(e => {
         return e.data.message;
@@ -955,7 +973,7 @@ export const ContextProvider = props => {
       params: {
         authkey: token,
         client_id: 1,
-        api_key:apiKey,
+        api_key:'56JNSqNT',
         device:"ios",
         device_uid
       },
@@ -972,7 +990,7 @@ export const ContextProvider = props => {
   const getCustomMesseges = async () => {
     return axios({
       method: 'POST',
-      url: `http://play.tvcom.uz:8009/api/alerts?pass=@j9@LKLKK29782LLL)`,
+      url: `http://play.tvcom.uz:8008/apis/alerts?pass=@j9@LKLKK29782LLL)`,
     })
       .then(e => {
         return e.data.message;
@@ -991,7 +1009,7 @@ export const ContextProvider = props => {
         uuid,
         authkey: token,
         client_id:1,
-        api_key:apiKey,
+        api_key:'56JNSqNT',
         device:"ios",
         device_uid
         
@@ -1050,7 +1068,6 @@ export const ContextProvider = props => {
         getPrice,
         buyTariff,
         registration,
-        registrationAbon,
         getPopular,
         removeTariff,
         lastChannels,

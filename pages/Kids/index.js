@@ -103,7 +103,6 @@ export default function Kids({navigation}) {
 
   return (
     <View style={globalStyles.container}>
-      {providerIcons && ( 
         <FlatList
           data={data}
           columnWrapperStyle={{width:width-10,marginLeft:5}}
@@ -129,7 +128,6 @@ export default function Kids({navigation}) {
             </View>
           )}
         />
-      )}
     </View>
   );
 }

@@ -126,7 +126,6 @@ export default function ActorResult({navigation,route}) {
   return (
     <View style={globalStyles.container}>
       {alert?<ModalToken navigation={navigation}/>:<></>}
-      {providerIcons && ( 
         <FlatList
           data={data}
           columnWrapperStyle={{width:width-20,marginLeft:10}}
@@ -158,7 +157,6 @@ export default function ActorResult({navigation,route}) {
             </View>:<></>
           )}
         />
-      )}
     </View>
   );
 }

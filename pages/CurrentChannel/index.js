@@ -71,7 +71,6 @@ function CurrentTv({navigation,route}) {
       };
       fetch();
     }, [navigation]);
-
   return (
     <View style={{flex:1,backgroundColor:'#010101'}}>
         {alert?<ModalToken navigation={navigation}/>:<></>}
@@ -80,7 +79,7 @@ function CurrentTv({navigation,route}) {
         <ActivityIndicator size={'large'} color='#fff'/>
         </View>:<></>}
 
-        <PlayerChannel 
+        <PlayerChasnnel 
           fetchTimeShift={fetchTimeShift}
           uri={uri} 
           currentChannel={currentChannel}

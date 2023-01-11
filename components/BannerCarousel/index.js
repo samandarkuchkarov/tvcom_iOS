@@ -54,7 +54,7 @@ const [banners,setBanners] = useState([])
             height: ITEM_HEIGHT,
           }}>
           <Image
-           source={{uri:'http://play.tvcom.uz:8009/storage/'+ item.img_mini}}
+           source={{uri:'http://play.tvcom.uz:8008/storage/'+ item.img_mini}}
            style={{width:ITEM_WIDTH,height:ITEM_HEIGHT,resizeMode:'cover'}}
           />
         </View>

@@ -103,8 +103,8 @@ function CurrentMovie({ navigation, route }) {
       if(!cinemaName|| providers){
         providers = await getCinema()
         if (render) {
-          setProviderIcons(providers)
-          providers.map(item => {
+          providers&&setProviderIcons(providers)
+          providers&&providers.map(item => {
             if (item.provider_id == providerId) {
               setCinemaName(item.provider_name)
             }
@@ -112,7 +112,7 @@ function CurrentMovie({ navigation, route }) {
         }
       }
       let aviable = true;
-      let movieTariffId =  providers.filter(item2=>item2.provider_id == movie.video_provider_id&&item2.provider_id!=3)[0];
+      let movieTariffId =  providers&&providers.filter(item2=>item2.provider_id == movie.video_provider_id&&item2.provider_id!=3)[0];
       if(movieTariffId){
         movieTariffId = movieTariffId.provider
       }
@@ -130,7 +130,13 @@ function CurrentMovie({ navigation, route }) {
         aviable = true
       }
       if(render){
-        setAviable(aviable)
+
+        if(typeof aviable=== 'undefined'){
+          setAviable(true)
+        }else{
+          setAviable(aviable)
+        }
+        
       }
 
       if(aviable){
@@ -518,8 +524,6 @@ function CurrentMovie({ navigation, route }) {
   }
 
 
-
-
   return (
 
     <ScrollView  ref={scrollView} style={styles.wrapper}>
@@ -543,7 +547,7 @@ function CurrentMovie({ navigation, route }) {
                     <Text allowFontScaling={false}style={styles.loginText}>Авторизоваться</Text>
                 </View>
             </TouchableWithoutFeedback>:<></>}
-            {isLogin&&!aviable&&cinemaName?<TouchableWithoutFeedback onPress={()=>{
+            {isLogin&&!aviable&&cinemaName&&providerIcons?<TouchableWithoutFeedback onPress={()=>{
               let item = providerIcons.filter(i=>i.provider_name==cinemaName)[0]
               navigation.navigate('PodpiskaMovie',{id:item.provider})
             }}>

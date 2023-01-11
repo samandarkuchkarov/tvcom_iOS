@@ -26,10 +26,13 @@ export default function Home({navigation}) {
   useEffect(() => {
     const fetch =async ()=>{
       const response = await checkWorld()
-      if(response.message){
+      console.log(response)
+      if(response.message===true){
         await setWorld(false)
-      }else{
+      }else if(response.message===false){
         await  setWorld(true)
+      }else{
+        setWorld(false)
       }
     }
     fetch()
@@ -131,10 +134,10 @@ export default function Home({navigation}) {
 
       let podborka = await getPodborkaChannels()
       let arr = [];
-      let icons = [...data]
+      let icons = data?[...data]:[]
       if (allData && render && podborka && data) { 
         for (let i = 0; i < allData.length; i++) {
-          let currentData = data.filter( item => item.genre_id == allData[i].id)[0];
+          let currentData = data&&data.filter( item => item.genre_id == allData[i].id)[0];
           
           if(!currentData){
             currentData = {
@@ -151,15 +154,15 @@ export default function Home({navigation}) {
             New.channel_id = currentData.channel_id;
             New.img = currentData.img;
             arr.push(New);
-            icons = icons.filter(item=>item.genre_id != New.genre_id)
+            icons = icons&&icons.filter(item=>item.genre_id != New.genre_id)
           }
         }
-        icons.map(i=>{
+        icons&&icons.map(i=>{
           let New = {...i}
           New.has_subscription = 0
           return New
         })
-        arr = [...arr,...icons]
+        arr = icons?[...arr,...icons]:arr
 
         let sorted = []
 
